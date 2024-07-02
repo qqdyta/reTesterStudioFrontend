@@ -2,23 +2,26 @@
   <div class="header-box"><HeaderBar></HeaderBar></div>
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
-    <div class="main-box"><MainContainer></MainContainer></div>
+    <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
+    <div class="main-box"><addedTestItemBox></addedTestItemBox></div>
   </div>
-
 
 </template>
 
 <script>
+import "./assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
-import MainContainer from "@/components/MainContainer.vue"
+import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
+import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
 import LeftSideBar from "@/components/LeftSideBar.vue"
 
 export default {
   name: 'App',
   components: {
     HeaderBar,
-    MainContainer,
-    LeftSideBar
+    addNewTestItemBox,
+    LeftSideBar,
+    addedTestItemBox
   }
 }
 </script>
