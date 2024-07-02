@@ -21,7 +21,7 @@ export default {
 <template>
 <div class="box">
   <div class="title">
-    添加测试项目
+    添加新测试项目
   </div>
   <div class="main">
     <addTestItemCard :setType="'voltage'"></addTestItemCard>
