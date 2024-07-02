@@ -1,0 +1,9 @@
+:root {
+    --color-voltage: #f1c40f;
+    --color-current: #3498db;
+    --color-oscilloscope: #2ecc71;
+    --color-ethernet: #e74c3c;
+    --color-usb: #9b59b6;
+    --color-serial: #34495e;
+    --color-wait: #969696;
+}
