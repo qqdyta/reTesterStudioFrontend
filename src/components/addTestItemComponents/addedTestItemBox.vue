@@ -3,8 +3,8 @@
     <div class="title">
       已添加测试项目
     </div>
-    <div class="main" >
-      <addTestItemCard ></addTestItemCard>
+    <div class="main" v-for="(component, index) in components" :key="component.id">
+      <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="removeTestItem(component)"></addTestItemCard>
     </div>
   </div>
 </template>
@@ -25,8 +25,19 @@ export default {
   },
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
-      console.log("another compoten get the data: ", data)
+      this.addNewTestItem(data)
     })
+  },
+  methods: {
+    addNewTestItem(data) {
+      this.components.push({
+        id: this.counter++,
+        setType: data
+      })
+    },
+    removeTestItem(component) {
+      this.components = this.components.filter(item => item.id !== component.id)
+    }
   }
 }
 </script>
