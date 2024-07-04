@@ -42,20 +42,12 @@ export default {
       }[this.setType]
     }
   },
-  methods: {
-    addNewTestItem() {
-      if(this.hasbeenAdded){
-        this.$emit('add-new-test-item', {'index': this.index, 'hasbeenAdded': this.hasbeenAdded})
-      }else{
-        this.$emit('add-new-test-item', {'index': this.index, 'hasbeenAdded': this.hasbeenAdded})
-      }
-    }
-  }
+  emits: ['click']
 }
 </script>
 
 <template>
-<div class="main" :style="{ backgroundColor: setColor}" @click="addNewTestItem">{{ setTitle }}</div>
+<div class="main" :style="{ backgroundColor: setColor}" @click="$emit('click')">{{ setTitle }}</div>
 </template>
 <style scoped>
 .main {

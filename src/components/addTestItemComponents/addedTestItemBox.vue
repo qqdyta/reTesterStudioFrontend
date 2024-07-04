@@ -1,5 +1,17 @@
+<template>
+  <div class="box">
+    <div class="title">
+      已添加测试项目
+    </div>
+    <div class="main" >
+      <addTestItemCard ></addTestItemCard>
+    </div>
+  </div>
+</template>
+
 <script>
-import addTestItemCard from "@/components/addTestItemComponents/addTestItemCard.vue"
+import addTestItemCard from "@/components/addTestItemComponents/addTestItemCard.vue";
+
 export default {
   name: 'addedNewTestItemBox',
   components: {
@@ -7,37 +19,17 @@ export default {
   },
   data() {
     return {
-      show: false
-    }
+      components: [],
+      counter: 0
+    };
   },
-  methods: {
-    toggle() {
-      this.show = !this.show
-    }
-  },
-  created() {
-    this.$bus.$on('add-new-test-item', (type) => {
-      console.log(type)
+  mounted() {
+    this.emitter.on('addNewTestItem', (data) => {
+      console.log("another compoten get the data: ", data)
     })
   }
 }
 </script>
-
-<template>
-  <div class="box">
-    <div class="title">
-      已添加测试项目
-    </div>
-    <div class="main">
-      <addTestItemCard :setType="'voltage'"></addTestItemCard>
-      <addTestItemCard :setType="'current'"></addTestItemCard>
-      <addTestItemCard :setType="'serialPort'"></addTestItemCard>
-      <addTestItemCard :setType="'ethernet'"></addTestItemCard>
-      <addTestItemCard :setType="'oscilloscope'"></addTestItemCard>
-      <addTestItemCard :setType="'wait'"></addTestItemCard>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .box {

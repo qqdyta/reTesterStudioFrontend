@@ -7,12 +7,13 @@ export default {
   },
   data() {
     return {
-      show: false
+      show: false,
     }
   },
   methods: {
-    toggle() {
-      this.show = !this.show
+    addNewTestItem(data) {
+      console.log(data)
+      this.emitter.emit('addNewTestItem', data)
     }
   }
 }
@@ -24,17 +25,14 @@ export default {
     添加新测试项目
   </div>
   <div class="main">
-    <addTestItemCard :setType="'voltage'"></addTestItemCard>
-    <addTestItemCard :setType="'current'"></addTestItemCard>
-    <addTestItemCard :setType="'serialPort'"></addTestItemCard>
-    <addTestItemCard :setType="'ethernet'"></addTestItemCard>
-    <addTestItemCard :setType="'oscilloscope'"></addTestItemCard>
-    <addTestItemCard :setType="'wait'"></addTestItemCard>
+    <addTestItemCard :setType="'voltage'"  @click="addNewTestItem('voltage')"></addTestItemCard>
+    <addTestItemCard :setType="'current'"  @click="addNewTestItem('current')"></addTestItemCard>
+    <addTestItemCard :setType="'serialPort'"  @click="addNewTestItem('serialPort')"></addTestItemCard>
+    <addTestItemCard :setType="'ethernet'"  @click="addNewTestItem('ethernet')"></addTestItemCard>
+    <addTestItemCard :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
+    <addTestItemCard :setType="'wait'"  @click="addNewTestItem('wait')"></addTestItemCard>
   </div>
 </div>
-
-
-
 </template>
 
 <style scoped>
