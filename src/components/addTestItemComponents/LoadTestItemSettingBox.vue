@@ -1,14 +1,15 @@
 <script>
+
 export default {
-  name: "PowerSupplySettingItem",
+  name: "LoadTestItemSettingBox",
   data() {
     return {
       testItemSettingData: {
-        stepName: "数字电源设置",
+        stepName: "电子负载设置",
         COM: 0,
-        stepType: "数字电源",
+        stepType: "电子负载",
         stepIndex: 0,
-        stepDescription: "设置数字电源",
+        stepDescription: "设置电子负载参数",
         mode: 'CC',
         value: 1
       }
@@ -64,10 +65,7 @@ export default {
         </el-col>
         <el-col :span="12">
           <el-form-item label="&nbsp;&nbsp;&nbsp;负载电流">
-            <el-input v-model="testItemSettingData.value">
-              <template #append>A</template>
-            </el-input>
-
+            <el-input v-model="testItemSettingData.value" />
           </el-form-item>
         </el-col>
       </el-row>
