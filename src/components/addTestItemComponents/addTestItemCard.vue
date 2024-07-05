@@ -22,24 +22,10 @@ export default {
   },
   computed: {
     setColor() {
-      return {
-        'voltage': 'var(--color-voltage)',
-        'current': 'var(--color-current)',
-        'oscilloscope': 'var(--color-oscilloscope)',
-        'ethernet': 'var(--color-ethernet)',
-        'serialPort': 'var(--color-serial)',
-        'wait': 'var(--color-wait)'
-      }[this.setType]
+      return this.$testItemDict[this.setType]['color']
     },
     setTitle() {
-      return {
-        'voltage': '电压测试',
-        'current': '电流测试',
-        'oscilloscope': '波形捕捉',
-        'ethernet': '网口通信',
-        'serialPort': '串口通信',
-        'wait': '等待'
-      }[this.setType]
+      return this.$testItemDict[this.setType]['title']
     }
   },
   emits: ['click']
