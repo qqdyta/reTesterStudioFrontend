@@ -1,9 +1,22 @@
 :root {
     --color-voltage: #f1c40f;
     --color-current: #3498db;
-    --color-oscilloscope: #2ecc71;
+    --color-oscilloscope: #f39c12;
     --color-ethernet: #e74c3c;
     --color-usb: #9b59b6;
     --color-serial: #34495e;
     --color-wait: #969696;
+    --color-power-supply: #2ecc71;
+    --color-load: #e67e22;
+}
+
+
+.z-up-shadow {
+    background-color: #f1f2f6;
+    box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+}
+
+.z-down-shadow {
+    background-color: #f1f2f6;
+    box-shadow: inset 4px 4px 8px 4px #d9d9d9, inset -4px -4px 8px 4px #ffffff, -4px -4px 4px 4px #f3f3f3;
 }
