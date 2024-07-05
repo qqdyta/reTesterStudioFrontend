@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       show: false,
+      activeTab: 'osc'
     }
   },
   methods: {
@@ -41,7 +42,7 @@ export default {
     添加新测试项目
   </div>
   <div class="main">
-    <el-tabs  class="demo-tabs"  @tab-click="handleTabClick">
+    <el-tabs  v-model="activeTab" class="demo-tabs"  @tab-click="handleTabClick">
       <el-tab-pane label="信号" name="osc">
         <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
         <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
@@ -123,6 +124,7 @@ export default {
 
 .item-card {
   width: 220px;
+  margin: 15px;
 }
 
 
