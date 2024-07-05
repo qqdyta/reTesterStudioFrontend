@@ -1,11 +1,11 @@
 <template>
   <div class="box">
-    <div class="title">
-      已添加测试项目
-    </div>
-    <div class="main" v-for="(component, index) in components" :key="component.id">
-      <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="removeTestItem(component)"></addTestItemCard>
-    </div>
+      <div class="title">
+        已添加测试项目
+      </div>
+      <div class="main" v-for="(component, index) in components" :key="component.id">
+        <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="removeTestItem(component)"></addTestItemCard>
+      </div>
   </div>
 </template>
 
