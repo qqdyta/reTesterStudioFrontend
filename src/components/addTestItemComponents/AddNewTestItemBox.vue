@@ -31,6 +31,8 @@ export default {
     <addTestItemCard :setType="'ethernet'"  @click="addNewTestItem('ethernet')"></addTestItemCard>
     <addTestItemCard :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
     <addTestItemCard :setType="'wait'"  @click="addNewTestItem('wait')"></addTestItemCard>
+    <addTestItemCard :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard>
+    <addTestItemCard :setType="'powerSupply'"  @click="addNewTestItem('powerSupply')"></addTestItemCard>
   </div>
 </div>
 </template>
