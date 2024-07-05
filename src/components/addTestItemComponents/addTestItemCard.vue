@@ -37,7 +37,7 @@ export default {
 </template>
 <style scoped>
 .main {
-  width: 220px;
+  width: 160px;
   height: 60px;
   margin: 15px;
   box-shadow: 3px 3px 3px 3px #d9d9d9;
