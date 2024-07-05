@@ -4,6 +4,7 @@
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
     <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
     <div class="main-box"><addedTestItemBox></addedTestItemBox></div>
+    <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
   </div>
 
 </template>
@@ -14,10 +15,12 @@ import HeaderBar from "@/components/HeaderBar.vue"
 import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
 import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
 import LeftSideBar from "@/components/LeftSideBar.vue"
+import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
 
 export default {
   name: 'App',
   components: {
+    TestItemSettingBox,
     HeaderBar,
     addNewTestItemBox,
     LeftSideBar,
