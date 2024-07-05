@@ -14,6 +14,22 @@ export default {
     addNewTestItem(data) {
       console.log(data)
       this.emitter.emit('addNewTestItem', data)
+    },
+    handleTabClick() {
+      this.$nextTick(() => {
+        const activeTab = this.$el.querySelector('.is-active');
+        if (activeTab) {
+          const mainContainer = this.$el.querySelector('.main');
+          const mainContainerWidth = mainContainer.clientWidth;
+          const activeTabLeft = activeTab.offsetLeft;
+          const activeTabWidth = activeTab.clientWidth;
+          const scrollPosition = activeTabLeft - (mainContainerWidth / 2) + (activeTabWidth / 2);
+          mainContainer.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
     }
   }
 }
@@ -25,14 +41,26 @@ export default {
     添加新测试项目
   </div>
   <div class="main">
-    <addTestItemCard :setType="'voltage'"  @click="addNewTestItem('voltage')"></addTestItemCard>
-    <addTestItemCard :setType="'current'"  @click="addNewTestItem('current')"></addTestItemCard>
-    <addTestItemCard :setType="'serialPort'"  @click="addNewTestItem('serialPort')"></addTestItemCard>
-    <addTestItemCard :setType="'ethernet'"  @click="addNewTestItem('ethernet')"></addTestItemCard>
-    <addTestItemCard :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
-    <addTestItemCard :setType="'wait'"  @click="addNewTestItem('wait')"></addTestItemCard>
-    <addTestItemCard :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard>
-    <addTestItemCard :setType="'powerSupply'"  @click="addNewTestItem('powerSupply')"></addTestItemCard>
+    <el-tabs  class="demo-tabs"  @tab-click="handleTabClick">
+      <el-tab-pane label="信号" name="osc">
+        <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'voltage'"  @click="addNewTestItem('voltage')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'current'"  @click="addNewTestItem('current')"></addTestItemCard>
+      </el-tab-pane>
+      <el-tab-pane label="电源" name="psld">
+        <addTestItemCard class="item-card"  :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'powerSupply'"  @click="addNewTestItem('powerSupply')"></addTestItemCard>
+
+      </el-tab-pane>
+      <el-tab-pane label="接口" name="spnw">
+        <addTestItemCard class="item-card"  :setType="'serialPort'"  @click="addNewTestItem('serialPort')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'ethernet'"  @click="addNewTestItem('ethernet')"></addTestItemCard>
+      </el-tab-pane>
+      <el-tab-pane label="其他" name="other">
+        <addTestItemCard class="item-card"  :setType="'wait'"  @click="addNewTestItem('wait')"></addTestItemCard>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </div>
 </template>
@@ -59,4 +87,43 @@ export default {
   width: 100%;
   height: 6vh;
 }
+.main {
+  width: 90%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+.demo-tabs {
+  display: inline-block; /* 确保tabs内容不会换行 */
+}
+
+/* 自定义滚动条样式 */
+.main::-webkit-scrollbar {
+  height: 14px; /* 滚动条高度 */
+}
+
+.main::-webkit-scrollbar-track {
+  background: #e1e1e1; /* 滚动条轨道颜色 */
+  border-radius: 7px; /* 圆角 */
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: #888; /* 滚动条滑块颜色 */
+  border-radius: 7px; /* 圆角 */
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 滑块悬停颜色 */
+}
+
+.demo-tabs {
+  display: inline-block; /* 确保tabs内容不会换行 */
+}
+
+
+.item-card {
+  width: 220px;
+}
+
+
 </style>
