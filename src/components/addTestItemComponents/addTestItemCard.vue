@@ -39,7 +39,7 @@ export default {
 .main {
   width: 160px;
   height: 60px;
-  margin: 15px;
+
   box-shadow: 3px 3px 3px 3px #d9d9d9;
   border-radius: 3px;
   display: flex;
