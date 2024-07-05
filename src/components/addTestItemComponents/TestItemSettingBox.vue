@@ -5,16 +5,22 @@ import EthernetTestItemSettingBox from "@/components/addTestItemComponents/Ether
 import VoltageTestItemSettingBox from "@/components/addTestItemComponents/VoltageTestItemSettingBox.vue";
 import SerialTestItemSettingBox from "@/components/addTestItemComponents/SerialTestItemSettingBox.vue";
 import WaitTestItemSettingBox from "@/components/addTestItemComponents/WaitTestItemSettingBox.vue";
-
+import LoadTestItemSettingBox from "@/components/addTestItemComponents/LoadTestItemSettingBox.vue";
+import powerSupplySettingItem from "@/components/addTestItemComponents/PowerSupplySettingItem.vue";
 export default {
   name: "TestItemSettingBox",
-  components: {VoltageTestItemSettingBox},
+  components: {
+    VoltageTestItemSettingBox,
+    LoadTestItemSettingBox,
+    powerSupplySettingItem,
+    WaitTestItemSettingBox
+  }
 }
 </script>
 
 <template>
 <div class="z-down-shadow box">
-  <VoltageTestItemSettingBox></VoltageTestItemSettingBox>
+ <WaitTestItemSettingBox></WaitTestItemSettingBox>
 </div>
 </template>
 
