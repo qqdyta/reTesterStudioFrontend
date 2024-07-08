@@ -5,33 +5,46 @@ import { reactive } from "vue";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-const emitter = mitt();
+
 const app = createApp(App)
 app.use(ElementPlus)
+
+
+const emitter = mitt();
+app.config.globalProperties.emitter = emitter;
+
+
 const testItemSettingData = reactive({
     stepName: '',
     stepDescription: '',
     stepMessage: '',
     valueData:{}
 })
-
 app.config.globalProperties.testItemSettingData = testItemSettingData
 
 
-const testItemDict = {
-    'voltage':  {color: 'var(--color-voltage)', title: '电压测试'},
-    'current':  {color: 'var(--color-current)', title: '电流测试'},
-    'oscilloscope':  {color: 'var(--color-oscilloscope)', title: '示波器'},
+const TEST_ITEM_DICT = {
+    'voltage':  {color: 'var(--color-dmm)', title: '电压测试'},
+    'current':  {color: 'var(--color-dmm)', title: '电流测试'},
+    'dmmConfig': {color: 'var(--color-dmm)', title: 'DMM设置'},
+    'oscilloscope':  {color: 'var(--color-oscilloscope)', title: '示波器设置'},
+    'oscGetWave':  {color: 'var(--color-oscilloscope)', title: '测试波形'},
+    'oscGetDelta':  {color: 'var(--color-oscilloscope)', title: '测试纹波'},
     'ethernet':  {color: 'var(--color-ethernet)', title: '以太网'},
     'serialPort':  {color: 'var(--color-serial)', title: '串口'},
     'wait': {color: 'var(--color-wait)', title: '等待'},
-    'powerSupply':{'color': 'var(--color-power-supply)', title: '数字电源'},
-    //'dmmConfig': {'color': 'var(--color-load)', title: '电子负载'},
-    //'OSCConfig': {'color': 'var(--color-load)', title: '电子负载'},
-
-    'load': {'color': 'var(--color-load)', title: '电子负载'}
+    'powerSupplySet':{color: 'var(--color-power-supply)', title: '电源设置'},
+    'powerSupplyOn':{color: 'var(--color-power-supply)', title: '电源开启'},
+    'powerSupplyOff':{color: 'var(--color-power-supply)', title: '电源关闭'},
+    'load': {color: 'var(--color-load)', title: '负载设置'},
+    'loadOn': {color: 'var(--color-load)', title: '负载开启'},
+    'loadOff': {color: 'var(--color-load)', title: '负载关闭'}
 }
+app.config.globalProperties.$testItemDict = TEST_ITEM_DICT
 
-app.config.globalProperties.$testItemDict = testItemDict
-app.config.globalProperties.emitter = emitter;
+
+let testItemProcess = {}
+app.config.globalProperties.$testProcess = testItemProcess
+
+
 app.mount('#app')
