@@ -1,6 +1,7 @@
 :root {
     --color-voltage: #f1c40f;
     --color-current: #3498db;
+    --color-dmm: #3498db;
     --color-oscilloscope: #f39c12;
     --color-ethernet: #e74c3c;
     --color-usb: #9b59b6;
@@ -9,7 +10,6 @@
     --color-power-supply: #2ecc71;
     --color-load: #e67e22;
 }
-
 
 .z-up-shadow {
     background-color: #f1f2f6;
