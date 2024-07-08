@@ -4,12 +4,13 @@
         已添加测试项目
       </div>
       <div class="main" v-for="(component, index) in components" :key="component.id">
-        <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="removeTestItem(component)"></addTestItemCard>
+        <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="openSettings(component)"></addTestItemCard>
       </div>
   </div>
 </template>
 
 <script>
+import { getCurrentInstance } from 'vue';
 import addTestItemCard from "@/components/addTestItemComponents/addTestItemCard.vue";
 
 export default {
@@ -23,21 +24,39 @@ export default {
       counter: 0
     };
   },
+  setup() {
+    const instance = getCurrentInstance()
+    const openSettings = (component) => {
+      const eventBus =instance.appContext.config.globalProperties.emitter
+      eventBus.emit('openSettingPage', component.setType);
+    }
+    return {
+      openSettings,
+    }
+  },
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
       this.addNewTestItem(data)
     })
   },
+  unmounted() {
+    this.emitter.off('addNewTestItem')
+  },
   methods: {
     addNewTestItem(data) {
       this.components.push({
         id: this.counter++,
-        setType: data
+        setType: data,
+        index: this.counter
       })
+      this.$testProcess[this.counter] = {'type': data}
+      //console.log(this.$testProcess)
     },
-    removeTestItem(component) {
-      this.components = this.components.filter(item => item.id !== component.id)
-    }
+    openSettingPage(component) {
+      console.log('the component is ', component)
+      this.$emit('openSettingPage', component)
+    },
+
   }
 }
 </script>
