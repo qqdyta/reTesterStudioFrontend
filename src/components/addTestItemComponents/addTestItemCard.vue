@@ -28,12 +28,41 @@ export default {
       return this.$testItemDict[this.setType]['title']
     }
   },
+  watch: {
+    index(newIndex, oldIndex) {
+      this.updateGlobalTestProcess(oldIndex, newIndex)
+    }
+  },
+  methods: {
+    updateGlobalTestProcess(oldIndex, newIndex) {
+      //console.log('the old index is ', oldIndex)
+      //console.log('the new index is ', newIndex)
+      if (oldIndex !== null && newIndex !== null) {
+        this.$testProcess[newIndex] = this.$testProcess[oldIndex]
+        delete this.$testProcess[oldIndex]
+        //console.log("this.$testProcess is ", this.$testProcess)
+      }else if (oldIndex !== null && newIndex === null) {
+        delete this.$testProcess[oldIndex]
+        //console.log("this.$testProcess is ", this.$testProcess)
+      }else if (newIndex !== null && oldIndex === null) {
+        this.$testProcess[newIndex] = {'type': this.setType}
+        //console.log("this.$testProcess is ", this.$testProcess)
+      }
+    }
+  },
+  created() {
+    this.updateGlobalTestProcess(null, this.index)
+  },
+  beforeUnmount() {
+    this.updateGlobalTestProcess(this.index, null)
+  },
   emits: ['click']
 }
 </script>
 
 <template>
-<div class="main" :style="{ backgroundColor: setColor}" @click="$emit('click')">{{ setTitle }}</div>
+  <div class="main" :style="{ backgroundColor: setColor}" @click="$emit('click')"><div hidden id="index"></div>{{ setTitle }}</div>
+
 </template>
 <style scoped>
 .main {
@@ -45,7 +74,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
 }
 </style>
