@@ -11,6 +11,13 @@ import powerSupplySettingItem from "@/components/addTestItemComponents/PowerSupp
 import dmmSettingBox from "@/components/addTestItemComponents/dmmSettingBox.vue";
 import DmmSettingBox from "@/components/addTestItemComponents/dmmSettingBox.vue";
 import OscGetWave from "@/components/addTestItemComponents/oscGetWave.vue";
+import loadOnSettingBox from "@/components/addTestItemComponents/loadOnSettingBox.vue";
+import loadOffSettingBox from "@/components/addTestItemComponents/loadOffSettingBox.vue";
+import powerSupplyOnSettingBox from "@/components/addTestItemComponents/powerSupplyOnSettingBox.vue";
+import powerSupplyOffSettingBox from "@/components/addTestItemComponents/powerSupplyOffSettingBox.vue";
+
+
+
 export default {
   name: "TestItemSettingBox",
   components: {
@@ -18,21 +25,63 @@ export default {
     VoltageTestItemSettingBox,
     LoadTestItemSettingBox,
     powerSupplySettingItem,
-    WaitTestItemSettingBox
+    WaitTestItemSettingBox,
+    SerialTestItemSettingBox,
+    EthernetTestItemSettingBox,
+    CurrentTestItemSettingBox,
+    OscGetWave,
+    loadOnSettingBox,
+    loadOffSettingBox,
+    powerSupplyOnSettingBox,
+    powerSupplyOffSettingBox,
   },
-  /*
+
   setup() {
     const currentComponent = ref(null)
     const instance = getCurrentInstance()
     const eventBus = instance.appContext.config.globalProperties.emitter
     const setComponent = (component) => {
       console.log('got open setting page event', component)
-      currentComponent.value = component;
-      return {
+      currentComponent.value = {
         'voltage': VoltageTestItemSettingBox,
         'current': CurrentTestItemSettingBox,
         'dmmConfig': LoadTestItemSettingBox,
+        'loadOn': loadOnSettingBox,
+        'loadOff': loadOffSettingBox,
+        'powerSupplyOn': powerSupplyOnSettingBox,
+        'powerSupplyOff': powerSupplyOffSettingBox,
+        'wait': WaitTestItemSettingBox,
+        'serialPort': SerialTestItemSettingBox,
+        'ethernet': EthernetTestItemSettingBox,
       }[component]
+
+
+/*
+            if(component === 'voltage'){
+        currentComponent.value = VoltageTestItemSettingBox
+      }else if(component === 'current') {
+        currentComponent.value = CurrentTestItemSettingBox
+      }else if(component === 'dmmConfig') {
+        currentComponent.value = LoadTestItemSettingBox
+      }else if(component === 'loadOn') {
+        currentComponent.value = loadOnSettingBox
+      }else if(component === 'loadOff') {
+        currentComponent.value = loadOffSettingBox
+      }else if(component === 'powerSupplySet') {
+        currentComponent.value = powerSupplySettingItem
+      }else if(component === 'powerSupplyOn') {
+        currentComponent.value = powerSupplyOnSettingBox
+      }else if(component === 'powerSupplyOn') {
+        currentComponent.value = powerSupplyOffSettingBox
+      }else if(component === 'wait') {
+        currentComponent.value = WaitTestItemSettingBox
+      }else if(component === 'serialPort') {
+        currentComponent.value = SerialTestItemSettingBox
+      }else if(component === 'ethernet') {
+        currentComponent.value = EthernetTestItemSettingBox
+      }
+
+
 
       if(component === 'voltage'){
         currentComponent.value = VoltageTestItemSettingBox
@@ -46,27 +95,27 @@ export default {
         currentComponent.value = LoadTestItemSettingBox
       }else if(component === 'powerSupplySet') {
         currentComponent.value = powerSupplySettingItem
-      }
+      }*/
     }
     onMounted(() => {
       eventBus.on('openSettingPage', setComponent);
-    });
+    })
 
     onUnmounted(() => {
-      eventBus.on('openSettingPage', setComponent);
-    });
+      eventBus.off('openSettingPage', setComponent);
+    })
+
     return {
       currentComponent,
     }
   }
-  */
 }
 </script>
 
 <template>
 <div class="z-down-shadow box">
-<!-- <component :is="currentComponent"></component>  -->
-<dmm-setting-box />
+<component :is="currentComponent"></component>
+
 </div>
 </template>
 
