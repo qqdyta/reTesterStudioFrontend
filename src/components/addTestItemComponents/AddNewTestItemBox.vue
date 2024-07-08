@@ -15,22 +15,6 @@ export default {
     addNewTestItem(data) {
       console.log(data)
       this.emitter.emit('addNewTestItem', data)
-    },
-    handleTabClick() {
-      this.$nextTick(() => {
-        const activeTab = this.$el.querySelector('.is-active');
-        if (activeTab) {
-          const mainContainer = this.$el.querySelector('.main');
-          const mainContainerWidth = mainContainer.clientWidth;
-          const activeTabLeft = activeTab.offsetLeft;
-          const activeTabWidth = activeTab.clientWidth;
-          const scrollPosition = activeTabLeft - (mainContainerWidth / 2) + (activeTabWidth / 2);
-          mainContainer.scrollTo({
-            left: scrollPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
     }
   }
 }
@@ -42,16 +26,22 @@ export default {
     添加新测试项目
   </div>
   <div class="main">
-    <el-tabs  v-model="activeTab" class="demo-tabs"  @tab-click="handleTabClick">
+    <el-tabs  v-model="activeTab" class="demo-tabs"  >
       <el-tab-pane label="信号" name="osc">
-        <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard>
+        <!-- <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard> -->
+        <addTestItemCard class="item-card"  :setType="'oscGetWave'"  @click="addNewTestItem('oscGetWave')"></addTestItemCard>
+        <!-- <addTestItemCard class="item-card"  :setType="'oscGetDelta'"  @click="addNewTestItem('oscGetDelta')"></addTestItemCard>  -->
         <addTestItemCard class="item-card"  :setType="'voltage'"  @click="addNewTestItem('voltage')"></addTestItemCard>
         <addTestItemCard class="item-card"  :setType="'current'"  @click="addNewTestItem('current')"></addTestItemCard>
+        <!--<addTestItemCard class="item-card"  :setType="'dmmConfig'"  @click="addNewTestItem('dmmConfig')"></addTestItemCard> -->
       </el-tab-pane>
       <el-tab-pane label="电源" name="psld">
-        <addTestItemCard class="item-card"  :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'powerSupply'"  @click="addNewTestItem('powerSupply')"></addTestItemCard>
+        <!-- <addTestItemCard class="item-card"  :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard> -->
+        <addTestItemCard class="item-card"  :setType="'loadOn'"  @click="addNewTestItem('loadOn')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'loadOff'"  @click="addNewTestItem('loadOff')"></addTestItemCard>
+        <!--<addTestItemCard class="item-card"  :setType="'powerSupplySet'"  @click="addNewTestItem('powerSupplySet')"></addTestItemCard> -->
+        <addTestItemCard class="item-card"  :setType="'powerSupplyOn'"  @click="addNewTestItem('powerSupplyOn')"></addTestItemCard>
+        <addTestItemCard class="item-card"  :setType="'powerSupplyOff'"  @click="addNewTestItem('powerSupplyOff')"></addTestItemCard>
 
       </el-tab-pane>
       <el-tab-pane label="接口" name="spnw">
