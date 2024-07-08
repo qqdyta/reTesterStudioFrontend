@@ -33,3 +33,36 @@
   range: 0,  //      0: 0.1V | 1: 1V  | 2: 10V  | 3: 100V
 ```
 
+
+## 卡片颜色定义
+  修改卡片的颜色位于main.js中的testItemDict字典
+
+
+
+
+
+# 组件对照单
+
+voltage    ----    VoltageTestItemSettingBox
+
+current    ----   CurrentTestItemSettingBox
+
+dmmConfig --- Na
+
+oscilloscope  ----   NA
+
+oscillgetWave ---   Osc
+
+ethernet   --- ethTestItemBox
+
+serialPort --  serialPortTestItemSettingBox
+
+wait   ----- waitSettingBox
+
+powerSupplyOn -----   powerSupplyOnSettingBox
+
+powerSupplyOff -----  powerSupplyOffSettingBox
+
+loadOn ----    loadOnSettingBox
+
+loadOff  ----  loadOffSettingBox
