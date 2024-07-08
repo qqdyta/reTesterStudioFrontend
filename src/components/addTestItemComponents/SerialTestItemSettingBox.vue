@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-<div></div>
+<div>SerialPortSettingBox</div>
 </template>
 
 <style scoped>
