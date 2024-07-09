@@ -39,8 +39,8 @@ export default {
 }
 .header-box {
   width: 100%;
-  height: 5vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+  height: 6vh;
+  background-color: #6aee3d;
 }
 
 .downer {
@@ -50,14 +50,14 @@ export default {
 
 .main-box {
   flex: 1;
+  height: 92vh;
   background-color: #f0f0f0;
-  height: 95vh;
 }
 
 .left-bar-box {
-  width: 60px;
-  height:95vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+  width: 100px;
+  height:92vh;
+  background-color: #ff6767;
 }
 
 </style>

@@ -77,20 +77,47 @@ export default {
 
 <template>
 <div class="z-down-shadow box">
-<component :is="currentComponent" :cardIndex="currentIndex"></component>
-
+  <component :is="currentComponent" :cardIndex="currentIndex"></component>
 </div>
+<div class="submit-button-box">
+  <el-row>
+    <el-col :span="12"></el-col>
+    <el-col :span="12">
+      <el-button class="submit-button z-up-shadow" type="basic White">保存</el-button>
+    </el-col>
+  </el-row>
+</div>
+
 </template>
 
 <style scoped>
 .box {
   margin: 15px;
-  width: 75vh;
-  height: 88vh;
+  width: 70vh;
+  height: 72vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+
+}
+
+.submit-button {
+  margin-top: 10px;
+  width: 90%;
+  height: 100px;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 10px 50px  50px 10px;
+  border: 1px solid #ffffff;
+}
+
+.submit-button:hover {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  font-size: 34px;
+  font-weight: lighter;
+  color: #606266
 }
 
 </style>

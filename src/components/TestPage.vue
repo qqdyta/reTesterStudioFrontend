@@ -18,7 +18,7 @@ import LeftSideBar from "@/components/LeftSideBar.vue"
 import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
 
 export default {
-  name: 'App',
+  name: 'TestPage',
   components: {
     TestItemSettingBox,
     HeaderBar,

@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       components: [],
-      counter: 0
+      counter: 0,
     };
   },
   setup() {
@@ -36,28 +36,32 @@ export default {
       openSettings,
     }
   },
+
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
       this.addNewTestItem(data)
     });
     this.emitter.on('removeTestItem', (data) => {
       console.log('removeTestItem', data)
+      this.counter--
       this.components = this.components.filter(item => item.index !== data)
+      this.$testProcess = this.$testProcess.filter(item => item.index !== data)
     });
-
   },
   unmounted() {
     this.emitter.off('addNewTestItem')
   },
   methods: {
     addNewTestItem(data) {
-      this.components.push({
+      const TEST_DATA = {
         id: this.counter++,
         setType: data,
         index: this.counter
-      })
-      this.$testProcess[this.counter] = {'type': data}
-      //console.log(this.$testProcess)
+      }
+      this.components.push(TEST_DATA)
+      this.$testProcess.push(TEST_DATA)
+      console.log('the test process is ', this.$testProcess)
+      console.log('the components is ', this.components)
     },
     openSettingPage(component) {
       console.log('the component is ', component)
