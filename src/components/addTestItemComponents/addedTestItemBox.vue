@@ -45,7 +45,6 @@ export default {
       console.log('removeTestItem', data)
       this.counter--
       this.components = this.components.filter(item => item.index !== data)
-      this.$testProcess = this.$testProcess.filter(item => item.index !== data)
     });
   },
   unmounted() {
@@ -59,8 +58,6 @@ export default {
         index: this.counter
       }
       this.components.push(TEST_DATA)
-      this.$testProcess.push(TEST_DATA)
-      console.log('the test process is ', this.$testProcess)
       console.log('the components is ', this.components)
     },
     openSettingPage(component) {
