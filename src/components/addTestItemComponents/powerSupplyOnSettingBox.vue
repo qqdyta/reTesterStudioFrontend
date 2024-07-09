@@ -1,6 +1,18 @@
 <script>
+import PageSettingButton from "@/components/addTestItemComponents/PageSettingButton.vue";
+
 export default {
   name: "PowerSupplyOnSettingBox",
+  components: {
+    PageSettingButton
+  },
+  props: {
+    cardIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  emits: ['click'],
   data() {
     return {
       testItemSettingData: {
@@ -93,13 +105,8 @@ export default {
       </el-row>
       <div>
         <el-row>
-          <el-col :span="16">
-          </el-col>
-          <el-col :span="8">
-            <div>
-              <el-button type="primary" >保存</el-button>
-              <el-button>取消</el-button>
-            </div>
+          <el-col :span="24">
+            <page-setting-button :cardIndex="this.cardIndex"></page-setting-button>
           </el-col>
         </el-row>
       </div>
