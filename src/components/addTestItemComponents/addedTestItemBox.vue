@@ -43,7 +43,6 @@ export default {
     });
     this.emitter.on('removeTestItem', (data) => {
       console.log('removeTestItem', data)
-      this.counter--
       this.components = this.components.filter(item => item.index !== data)
 
     });
