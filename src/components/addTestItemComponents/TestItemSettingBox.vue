@@ -38,14 +38,17 @@ export default {
 
   setup() {
     const currentComponent = ref(null)
+    const currentIndex = ref(0)
     const instance = getCurrentInstance()
     const eventBus = instance.appContext.config.globalProperties.emitter
     const setComponent = (component) => {
       console.log('got open setting page event', component)
+      currentIndex.value = component[1]
       currentComponent.value = {
         'voltage': VoltageTestItemSettingBox,
         'current': CurrentTestItemSettingBox,
         'dmmConfig': LoadTestItemSettingBox,
+        'oscGetWave': OscGetWave,
         'loadOn': loadOnSettingBox,
         'loadOff': loadOffSettingBox,
         'powerSupplyOn': powerSupplyOnSettingBox,
@@ -53,49 +56,7 @@ export default {
         'wait': WaitTestItemSettingBox,
         'serialPort': SerialTestItemSettingBox,
         'ethernet': EthernetTestItemSettingBox,
-      }[component]
-
-
-/*
-            if(component === 'voltage'){
-        currentComponent.value = VoltageTestItemSettingBox
-      }else if(component === 'current') {
-        currentComponent.value = CurrentTestItemSettingBox
-      }else if(component === 'dmmConfig') {
-        currentComponent.value = LoadTestItemSettingBox
-      }else if(component === 'loadOn') {
-        currentComponent.value = loadOnSettingBox
-      }else if(component === 'loadOff') {
-        currentComponent.value = loadOffSettingBox
-      }else if(component === 'powerSupplySet') {
-        currentComponent.value = powerSupplySettingItem
-      }else if(component === 'powerSupplyOn') {
-        currentComponent.value = powerSupplyOnSettingBox
-      }else if(component === 'powerSupplyOn') {
-        currentComponent.value = powerSupplyOffSettingBox
-      }else if(component === 'wait') {
-        currentComponent.value = WaitTestItemSettingBox
-      }else if(component === 'serialPort') {
-        currentComponent.value = SerialTestItemSettingBox
-      }else if(component === 'ethernet') {
-        currentComponent.value = EthernetTestItemSettingBox
-      }
-
-
-
-      if(component === 'voltage'){
-        currentComponent.value = VoltageTestItemSettingBox
-      }else if(component === 'current') {
-        currentComponent.value = CurrentTestItemSettingBox
-      }else if(component === 'dmmConfig') {
-        currentComponent.value = LoadTestItemSettingBox
-      }else if(component === 'powerSupplySet') {
-        currentComponent.value = powerSupplySettingItem
-      }else if(component === 'load') {
-        currentComponent.value = LoadTestItemSettingBox
-      }else if(component === 'powerSupplySet') {
-        currentComponent.value = powerSupplySettingItem
-      }*/
+      }[component[0]]
     }
     onMounted(() => {
       eventBus.on('openSettingPage', setComponent);
@@ -107,14 +68,16 @@ export default {
 
     return {
       currentComponent,
+      currentIndex
     }
-  }
+  },
+
 }
 </script>
 
 <template>
 <div class="z-down-shadow box">
-<component :is="currentComponent"></component>
+<component :is="currentComponent" :cardIndex="currentIndex"></component>
 
 </div>
 </template>
