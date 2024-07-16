@@ -3,7 +3,7 @@
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
     <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
-    <div class="main-box"><addedTestItemBox></addedTestItemBox></div>
+    <div class="main-box"><addedTestItemBox :components="this.component" :counter="this.counter"></addedTestItemBox></div>
     <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
   </div>
 
@@ -25,6 +25,45 @@ export default {
     addNewTestItemBox,
     LeftSideBar,
     addedTestItemBox
+  },
+  data(){
+    return {
+      component: [],
+      counter: 0,
+    }
+  },
+
+  mounted() {
+    this.emitter.on('addNewTestItem', (data) => {
+      console.log('addNewTestItem', data)
+      this.addNewTestItem(data)
+    });
+    this.emitter.on('removeTestItem', (data) => {
+      console.log('removeTestItem', data)
+      console.log('the components is ', this.component)
+      //const TARGET_INDEX = this.component.findIndex(item => item.index === data)
+
+      this.component = this.component.filter(item => item.index !== data)
+
+    });
+  },
+  unmounted() {
+    this.emitter.off('addNewTestItem')
+  },
+  methods: {
+    addNewTestItem(data) {
+      const TEST_DATA = {
+        id: this.counter++,
+        setType: data,
+        index: this.counter
+      }
+      this.component.push(TEST_DATA)
+      console.log('the components is ', this.component)
+    },
+    openSettingPage(component) {
+      console.log('the component is ', component)
+      this.$emit('openSettingPage', component)
+    }
   }
 }
 </script>
@@ -39,8 +78,8 @@ export default {
 }
 .header-box {
   width: 100%;
-  height: 6vh;
-  background-color: #6aee3d;
+  height: 5vh;
+  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
 
 .downer {
@@ -50,14 +89,14 @@ export default {
 
 .main-box {
   flex: 1;
-  height: 92vh;
   background-color: #f0f0f0;
+  height: 95vh;
 }
 
 .left-bar-box {
-  width: 100px;
-  height:92vh;
-  background-color: #ff6767;
+  width: 60px;
+  height:95vh;
+  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
 
 </style>
