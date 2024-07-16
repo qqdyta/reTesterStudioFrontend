@@ -3,26 +3,34 @@
       <div class="title">
         已添加测试项目
       </div>
-      <div class="main" v-for="(component, index) in components" :key="component.id">
-        <addTestItemCard :setType="component.setType" :hasbeenAdded="true" :index="index" @click="openSettings(component)"></addTestItemCard>
+      <div class="main" v-for="(item, index) in component" :key="item.id">
+        <addTestItemCard :setType="item.setType" :hasbeenAdded="true" :index="index" @click="openSettings(item)"></addTestItemCard>
       </div>
   </div>
 </template>
 
 <script>
-import { getCurrentInstance } from 'vue';
 import addTestItemCard from "@/components/addTestItemComponents/addTestItemCard.vue";
+import {getCurrentInstance} from "vue";
 
 export default {
   name: 'addedNewTestItemBox',
   components: {
     addTestItemCard
   },
-  data() {
-    return {
-      components: [],
-      counter: 0,
-    };
+  props: {
+    component: [],
+    counter: {
+      default:0
+    }
+  },
+  watch: {
+    component: {
+      handler: function (val) {
+        console.log('the child component is ', val)
+      },
+      deep: true
+    }
   },
   setup() {
     const instance = getCurrentInstance()
@@ -33,40 +41,6 @@ export default {
     return {
       openSettings,
     }
-  },
-
-  mounted() {
-    this.emitter.on('addNewTestItem', (data) => {
-      this.addNewTestItem(data)
-    });
-    this.emitter.on('removeTestItem', (data) => {
-      console.log('removeTestItem', data)
-      console.log('the components is ', this.components)
-      const TARGET_INDEX = this.components.findIndex(item => item.index === data)
-
-      this.components = this.components.filter(item => item.index !== data)
-      this.openSettings(this.components[TARGET_INDEX-1])
-
-    });
-  },
-  unmounted() {
-    this.emitter.off('addNewTestItem')
-  },
-  methods: {
-    addNewTestItem(data) {
-      const TEST_DATA = {
-        id: this.counter++,
-        setType: data,
-        index: this.counter
-      }
-      this.components.push(TEST_DATA)
-      console.log('the components is ', this.components)
-    },
-    openSettingPage(component) {
-      console.log('the component is ', component)
-      this.$emit('openSettingPage', component)
-    },
-
   }
 }
 </script>
