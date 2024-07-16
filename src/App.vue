@@ -3,7 +3,7 @@
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
     <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
-    <div class="main-box"><addedTestItemBox></addedTestItemBox></div>
+    <div class="main-box"><addedTestItemBox :component="this.component" :counter="this.counter"></addedTestItemBox></div>
     <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
   </div>
 
@@ -25,6 +25,45 @@ export default {
     addNewTestItemBox,
     LeftSideBar,
     addedTestItemBox
+  },
+  data(){
+    return {
+      component: [],
+      counter: 0,
+    }
+  },
+
+  mounted() {
+    this.emitter.on('addNewTestItem', (data) => {
+      console.log('addNewTestItem', data)
+      this.addNewTestItem(data)
+    });
+    this.emitter.on('removeTestItem', (data) => {
+      console.log('removeTestItem', data)
+      console.log('the components is ', this.component)
+      //const TARGET_INDEX = this.component.findIndex(item => item.index === data)
+
+      this.component = this.component.filter(item => item.index !== data)
+
+    });
+  },
+  unmounted() {
+    this.emitter.off('addNewTestItem')
+  },
+  methods: {
+    addNewTestItem(data) {
+      const TEST_DATA = {
+        id: this.counter++,
+        setType: data,
+        index: this.counter
+      }
+      this.component.push(TEST_DATA)
+      console.log('the components is ', this.component)
+    },
+    openSettingPage(component) {
+      console.log('the component is ', component)
+      this.$emit('openSettingPage', component)
+    }
   }
 }
 </script>
