@@ -12,6 +12,14 @@ export default {
     }
   },
   emits: ['click'],
+  watch: {
+    testItemSettingData: {
+      handler(val) {
+        console.log('current test item setting data is ', val)
+      },
+      deep: true
+    }
+  },
   data() {
     return {
       testItemSettingData: {
