@@ -17,7 +17,6 @@ import powerSupplyOnSettingBox from "@/components/addTestItemComponents/powerSup
 import powerSupplyOffSettingBox from "@/components/addTestItemComponents/powerSupplyOffSettingBox.vue";
 
 
-
 export default {
   name: "TestItemSettingBox",
   components: {
@@ -42,21 +41,25 @@ export default {
     const instance = getCurrentInstance()
     const eventBus = instance.appContext.config.globalProperties.emitter
     const setComponent = (component) => {
-      console.log('got open setting page event', component)
-      currentIndex.value = component[1]
-      currentComponent.value = {
-        'voltage': VoltageTestItemSettingBox,
-        'current': CurrentTestItemSettingBox,
-        'dmmConfig': LoadTestItemSettingBox,
-        'oscGetWave': OscGetWave,
-        'loadOn': loadOnSettingBox,
-        'loadOff': loadOffSettingBox,
-        'powerSupplyOn': powerSupplyOnSettingBox,
-        'powerSupplyOff': powerSupplyOffSettingBox,
-        'wait': WaitTestItemSettingBox,
-        'serialPort': SerialTestItemSettingBox,
-        'ethernet': EthernetTestItemSettingBox,
-      }[component[0]]
+      if(component !== null){
+        console.log('got open setting page event', component)
+        currentIndex.value = component[1]
+        currentComponent.value = {
+          'voltage': VoltageTestItemSettingBox,
+          'current': CurrentTestItemSettingBox,
+          'dmmConfig': LoadTestItemSettingBox,
+          'oscGetWave': OscGetWave,
+          'loadOn': loadOnSettingBox,
+          'loadOff': loadOffSettingBox,
+          'powerSupplyOn': powerSupplyOnSettingBox,
+          'powerSupplyOff': powerSupplyOffSettingBox,
+          'wait': WaitTestItemSettingBox,
+          'serialPort': SerialTestItemSettingBox,
+          'ethernet': EthernetTestItemSettingBox,
+        }[component[0]]
+      }else{
+        currentComponent.value = null
+      }
     }
     onMounted(() => {
       eventBus.on('openSettingPage', setComponent);
@@ -77,7 +80,7 @@ export default {
 
 <template>
 <div class="z-down-shadow box">
-  <component :is="currentComponent" :cardIndex="currentIndex"></component>
+  <component class="box" :is="currentComponent" :cardIndex="currentIndex"></component>
 </div>
 <div class="submit-button-box">
   <el-row>

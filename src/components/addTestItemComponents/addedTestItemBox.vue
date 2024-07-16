@@ -28,8 +28,6 @@ export default {
     const instance = getCurrentInstance()
     const openSettings = (component) => {
       const eventBus =instance.appContext.config.globalProperties.emitter
-      console.log('the index is ', component.index)
-      console.log('the id is ', component.id)
       eventBus.emit('openSettingPage', [component.setType, component.index])
     }
     return {
@@ -43,7 +41,11 @@ export default {
     });
     this.emitter.on('removeTestItem', (data) => {
       console.log('removeTestItem', data)
+      console.log('the components is ', this.components)
+      const TARGET_INDEX = this.components.findIndex(item => item.index === data)
+
       this.components = this.components.filter(item => item.index !== data)
+      this.openSettings(this.components[TARGET_INDEX-1])
 
     });
   },
