@@ -1,20 +1,20 @@
 <script>
 /* eslint-disable */
 import { ref, onMounted, onUnmounted, getCurrentInstance  } from 'vue'
-import CurrentTestItemSettingBox from "@/components/addTestItemComponents/CurrentTestItemSettingBox.vue";
-import EthernetTestItemSettingBox from "@/components/addTestItemComponents/EthernetTestItemSettingBox.vue";
-import VoltageTestItemSettingBox from "@/components/addTestItemComponents/VoltageTestItemSettingBox.vue";
-import SerialTestItemSettingBox from "@/components/addTestItemComponents/SerialTestItemSettingBox.vue";
-import WaitTestItemSettingBox from "@/components/addTestItemComponents/WaitTestItemSettingBox.vue";
-import LoadTestItemSettingBox from "@/components/addTestItemComponents/LoadTestItemSettingBox.vue";
-import powerSupplySettingItem from "@/components/addTestItemComponents/PowerSupplySettingItem.vue";
-import dmmSettingBox from "@/components/addTestItemComponents/dmmSettingBox.vue";
-import DmmSettingBox from "@/components/addTestItemComponents/dmmSettingBox.vue";
-import OscGetWave from "@/components/addTestItemComponents/oscGetWave.vue";
-import loadOnSettingBox from "@/components/addTestItemComponents/loadOnSettingBox.vue";
-import loadOffSettingBox from "@/components/addTestItemComponents/loadOffSettingBox.vue";
-import powerSupplyOnSettingBox from "@/components/addTestItemComponents/powerSupplyOnSettingBox.vue";
-import powerSupplyOffSettingBox from "@/components/addTestItemComponents/powerSupplyOffSettingBox.vue";
+import CurrentTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/CurrentTestItemSettingBox.vue";
+import EthernetTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/EthernetTestItemSettingBox.vue";
+import VoltageTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/VoltageTestItemSettingBox.vue";
+import SerialTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/SerialTestItemSettingBox.vue";
+import WaitTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/WaitTestItemSettingBox.vue";
+import LoadTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/LoadTestItemSettingBox.vue";
+import powerSupplySettingItem from "@/components/addTestItemComponents/testItemSettingCard/PowerSupplySettingItem.vue";
+import dmmSettingBox from "@/components/addTestItemComponents/testItemSettingCard/dmmSettingBox.vue";
+import DmmSettingBox from "@/components/addTestItemComponents/testItemSettingCard/dmmSettingBox.vue";
+import OscGetWave from "@/components/addTestItemComponents/testItemSettingCard/oscGetWave.vue";
+import loadOnSettingBox from "@/components/addTestItemComponents/testItemSettingCard/loadOnSettingBox.vue";
+import loadOffSettingBox from "@/components/addTestItemComponents/testItemSettingCard/loadOffSettingBox.vue";
+import powerSupplyOnSettingBox from "@/components/addTestItemComponents/testItemSettingCard/powerSupplyOnSettingBox.vue";
+import powerSupplyOffSettingBox from "@/components/addTestItemComponents/testItemSettingCard/powerSupplyOffSettingBox.vue";
 
 
 export default {
