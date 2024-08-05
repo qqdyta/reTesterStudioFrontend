@@ -14,8 +14,8 @@ export default {
     }
   },
   methods: {
-    toggle() {
-      this.show = !this.show
+    openMainPage() {
+      console.log('openMainPage')
     }
   }
 }
@@ -25,10 +25,10 @@ export default {
   <div class="main">
     <div>
       <div class="menu-option">
-        <div class="menu-icon-box">
+        <div class="menu-icon-box" @click="openMainPage">
           <el-icon :size="30" ><House /></el-icon>
         </div>
-        <div class="menu-icon-text">主 页</div>
+        <div class="menu-icon-text" >主 页</div>
       </div>
     </div>
 
