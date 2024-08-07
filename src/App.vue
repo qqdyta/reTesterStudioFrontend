@@ -3,9 +3,9 @@
   <div class="header-box"><HeaderBar></HeaderBar></div>
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
-    <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
-    <div class="main-box"><addedTestItemBox :component="this.component" :counter="this.counter"></addedTestItemBox></div>
-    <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
+    <div class="right-box">
+      <add-new-test-process-page class="add-new-test-process-page"></add-new-test-process-page>
+    </div>
   </div>
 
 </template>
@@ -13,18 +13,14 @@
 <script>
 import "./assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
-import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
-import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
 import LeftSideBar from "@/components/LeftSideBar.vue"
-import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
+import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue";
 export default {
   name: 'App',
   components: {
-    TestItemSettingBox,
+    addNewTestProcessPage,
     HeaderBar,
-    addNewTestItemBox,
     LeftSideBar,
-    addedTestItemBox
   },
   data(){
     return {
@@ -217,6 +213,10 @@ export default {
 -->
 
 <style>
+.add-new-test-process-page {
+  width: 170vh;
+  height: 95vh;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -234,11 +234,8 @@ export default {
   display: flex;
   flex: 1;
 }
-
-.main-box {
-  flex: 1;
-  background-color: #f0f0f0;
-  height: 95vh;
+.left-bar-box{
+  width: 100vh;
 }
 
 .left-bar-box {
