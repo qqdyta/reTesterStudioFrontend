@@ -1,38 +1,29 @@
 <template>
-  <div class="header-box"><HeaderBar></HeaderBar></div>
-  <div class="downer">
-    <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
-    <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
-    <div class="main-box"><addedTestItemBox :components="this.component" :counter="this.counter"></addedTestItemBox></div>
-    <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
+  <div class="main-box">
+    <add-new-test-item-box class="add-new-test-item-box"></add-new-test-item-box>
+    <flowBox class="flow-box" :progress="component"></flowBox>
   </div>
-
 </template>
 
 <script>
-import "./assets/main.css"
-import HeaderBar from "@/components/HeaderBar.vue"
+import "../assets/main.css"
 import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
-import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
-import LeftSideBar from "@/components/LeftSideBar.vue"
-import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
+import flowBox from "@/components/addNewTestFlow/flowBox.vue";
 
 export default {
   name: 'App',
   components: {
-    TestItemSettingBox,
-    HeaderBar,
-    addNewTestItemBox,
-    LeftSideBar,
-    addedTestItemBox
+    flowBox,
+    addNewTestItemBox
   },
   data(){
     return {
       component: [],
       counter: 0,
+      xPosition: 250,
+      yPosition: 0
     }
   },
-
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
       console.log('addNewTestItem', data)
@@ -41,10 +32,7 @@ export default {
     this.emitter.on('removeTestItem', (data) => {
       console.log('removeTestItem', data)
       console.log('the components is ', this.component)
-      //const TARGET_INDEX = this.component.findIndex(item => item.index === data)
-
       this.component = this.component.filter(item => item.index !== data)
-
     });
   },
   unmounted() {
@@ -55,8 +43,13 @@ export default {
       const TEST_DATA = {
         id: this.counter++,
         setType: data,
-        index: this.counter
+        index: this.counter,
+        position: {x: this.xPosition , y: this.yPosition},
+        type: 'output',
+        data: {label: 'TestNode' + this.counter},
+        class: 'light'
       }
+      this.yPosition += 100
       this.component.push(TEST_DATA)
       console.log('the components is ', this.component)
     },
@@ -69,34 +62,26 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.header-box {
-  width: 100%;
-  height: 5vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
-}
-
-.downer {
-  display: flex;
-  flex: 1;
-}
-
 .main-box {
   flex: 1;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #f0f0f0;
-  height: 95vh;
 }
 
-.left-bar-box {
-  width: 60px;
-  height:95vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+.add-new-test-item-box {
+  position: absolute;
+  width: 15%;
+  z-index: 1;
 }
+
+.flow-box {
+  position: absolute;
+  z-index: 0;
+}
+
+
+
 
 </style>
