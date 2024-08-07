@@ -1,4 +1,3 @@
-
 <template>
   <div class="header-box"><HeaderBar></HeaderBar></div>
   <div class="downer">
@@ -7,7 +6,6 @@
       <add-new-test-process-page class="add-new-test-process-page"></add-new-test-process-page>
     </div>
   </div>
-
 </template>
 
 <script>
