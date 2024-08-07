@@ -1,27 +1,22 @@
 <script setup>
 /* eslint-disable */
-import { ref } from 'vue'
+import { ref, markRaw } from 'vue'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { MiniMap } from '@vue-flow/minimap'
-import { initialEdges, initialNodes } from './initial-elements.js'
-import Icon from './IconBox.vue'
-
+import StartNode from "@/components/addNewTestFlow/flowNodes/startNode.vue"
 const { onInit, onNodeDragStop, onConnect, addEdges } = useVueFlow()
 
-const nodes = ref(initialNodes)
-const edges = ref(initialEdges)
 
-
-// our dark mode toggle flag
 const dark = ref(false)
-
+const nodeTypes = {
+  start: StartNode
+}
 
 onInit((vueFlowInstance) => {
   // instance is the same as the return of `useVueFlow`
   vueFlowInstance.fitView()
 })
-
 
 onNodeDragStop(({ event, nodes, node }) => {
   console.log('Node Drag Stop', { event, nodes, node })
@@ -45,8 +40,6 @@ onConnect((connection) => {
 })
 
 </script>
-
-
 <template>
   <VueFlow
       :nodes="steps.progress"
@@ -55,12 +48,10 @@ onConnect((connection) => {
       :default-viewport="{ zoom: 1.5 }"
       :min-zoom="0.2"
       :max-zoom="4"
+      :nodeTypes="nodeTypes"
   >
     <Background />
-
     <MiniMap />
-
-
   </VueFlow>
 </template>
 <style scoped>
