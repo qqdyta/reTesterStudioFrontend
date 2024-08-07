@@ -2,17 +2,22 @@
   <div class="main-box">
     <add-new-test-item-box class="add-new-test-item-box"></add-new-test-item-box>
     <flowBox class="flow-box" :progress="component"></flowBox>
+    <div class="test-item-setting-box">
+      <test-item-setting-box></test-item-setting-box>
+    </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import "../assets/main.css"
 import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
 import flowBox from "@/components/addNewTestFlow/flowBox.vue";
-
+import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
 export default {
   name: 'App',
   components: {
+    TestItemSettingBox,
     flowBox,
     addNewTestItemBox
   },
@@ -43,11 +48,12 @@ export default {
       const TEST_DATA = {
         id: this.counter++,
         setType: data,
+        label: data,
         index: this.counter,
         position: {x: this.xPosition , y: this.yPosition},
-        type: 'output',
         data: {label: 'TestNode' + this.counter},
-        class: 'light'
+        class: 'light',
+        type: "start"
       }
       this.yPosition += 100
       this.component.push(TEST_DATA)
@@ -81,7 +87,12 @@ export default {
   z-index: 0;
 }
 
-
+.test-item-setting-box{
+  position: absolute;
+  right: 10%;
+  width: 15%;
+  z-index: 1;
+}
 
 
 </style>
