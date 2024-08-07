@@ -44,7 +44,7 @@ const TEST_ITEM_DICT = {
     'loadOff': {color: 'var(--color-load)', title: '负载关闭'}
 }
 app.config.globalProperties.$testItemDict = TEST_ITEM_DICT
-
+app.provide('$testItemDict', TEST_ITEM_DICT);
 
 let testItemProcess = []
 app.config.globalProperties.$testProcess = testItemProcess
