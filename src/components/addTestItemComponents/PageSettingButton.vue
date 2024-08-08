@@ -27,7 +27,6 @@ export default {
       <el-col :span="8">
         <div>
           <el-button type="primary" >保存</el-button>
-          <el-button>取消</el-button>
         </div>
       </el-col>
     </el-row>
