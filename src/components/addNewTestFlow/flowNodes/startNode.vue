@@ -30,6 +30,7 @@ const computedTitle = computed(() => {
   </div>
 </template>
 <style scoped>
+
 .node-box{
   display: flex;
   align-items: center;
@@ -39,6 +40,7 @@ const computedTitle = computed(() => {
   height: 60px;
   font-size: 16px;
 }
+
 .vue-flow__handle_top {
   height:10px;
   width:15px;
