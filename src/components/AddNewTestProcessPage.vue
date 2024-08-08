@@ -32,12 +32,10 @@ export default {
   },
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
-      console.log('addNewTestItem', data)
       this.addNewTestItem(data)
     });
     this.emitter.on('removeTestItem', (data) => {
-      console.log('removeTestItem', data)
-      console.log('the components is ', this.component)
+
       this.component = this.component.filter(item => item.index !== data)
     });
   },
@@ -47,7 +45,6 @@ export default {
   methods: {
 
     addNewTestItem(data) {
-
 
       const TEST_DATA = {
         id: this.counter++,
@@ -62,7 +59,6 @@ export default {
       this.emitter.emit('addNewTestProgress', TEST_DATA)
       this.yPosition += 100
       this.component.push(TEST_DATA)
-      console.log('the components is ', JSON.stringify(this.component))
     },
     openSettingPage(component) {
 
