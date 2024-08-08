@@ -61,7 +61,6 @@ export default {
       this.component.push(TEST_DATA)
     },
     openSettingPage(component) {
-
       this.$emit('openSettingPage', component)
     }
   }
