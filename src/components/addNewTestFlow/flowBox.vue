@@ -1,19 +1,19 @@
 <script setup>
 /* eslint-disable */
-import {ref, getCurrentInstance, onMounted, markRaw} from 'vue'
+import {ref, onMounted, markRaw} from 'vue'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { MiniMap } from '@vue-flow/minimap'
 import StartNode from "@/components/addNewTestFlow/flowNodes/startNode.vue"
 import emitter from "@/main";
-const { onInit, onNodeDragStop, onConnect, addEdges, onNodeClick, addNodes } = useVueFlow()
+const { onInit, onNodeDragStop, onConnect, addEdges, onNodeClick, addNodes, removeNodes, findNode, getEdges } = useVueFlow()
 
 const dark = ref(false)
 const nodeTypes = {
   start: markRaw(StartNode)
 }
 
-
+let last_add_node_id = -1
 
 
 
@@ -22,29 +22,37 @@ onInit((vueFlowInstance) => {
   // instance is the same as the return of `useVueFlow`
   vueFlowInstance.fitView()
 })
-
-
-onNodeDragStop(({ event, nodes, node }) => {
-  console.log('Node Drag Stop', { event, nodes, node })
-})
-
 const initialNodes = ref([])
 const initialEdges = ref([])
 onMounted(()=> {
   emitter.on('addNewTestProgress', (data) => {
-    console.log('addNewTestProgress', data)
     initialNodes.value = [...initialNodes.value, data]
-    console.log('the node is ', initialNodes.value)
+    last_add_node_id = data.id
     addNodes(data)
-    console.log('the data is ', data)
     if(data.id > 0){
+      /*let source_node_id = last_add_node_id === -1 ? 0 : last_add_node_id - 1*/
       initialEdges.value.push({
         id: ( data.id - 1 ) + '_2_'+data.id,
         source: (data.id - 1).toString(),
         target: data.id.toString()
       })
-      console.log('the edges is ', initialEdges.value)
     }
+    console.log('the edged is ', initialEdges.value)
+  })
+
+  emitter.on('removeTestItem', (data) => {
+    initialNodes.value.forEach((item, index) => {
+
+      if(item.index === data){
+
+        //initialNodes.value = initialNodes.value.filter(item => item.index !== data)
+        const SHOULD_DELETE_NODE = findNode((item.id).toString())
+        removeNodes(SHOULD_DELETE_NODE)
+      }
+    })
+    console.log('the data is ', data)
+
+    initialEdges.value = initialEdges.value.filter(item => (item.source).toString() !== (data - 1).toString() && item.target !== (data - 1).toString())
   })
 })
 
@@ -65,13 +73,17 @@ const steps = defineProps({
 const nodes = ref(steps.progress)
 
 onNodeClick((node) => {
-  console.log('Node Click', node.node)
-  console.log('the setting is ', node.node.setType)
+  console.log('the edge is ', initialEdges.value)
   openSettings({'setType': node.node.setType,'index': node.node.index})
 })
 
 onConnect((connection) => {
-  addEdges(connection)
+  console.log('the connection is ', connection)
+  initialEdges.value.push({
+    id: connection.source + '_2_' + connection.target,
+    source: connection.source,
+    target: connection.target
+  })
 })
 
 </script>
