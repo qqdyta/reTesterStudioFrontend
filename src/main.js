@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, warn } from 'vue'
 import App from './App.vue'
 import mitt from 'mitt';
 import { reactive } from "vue";
@@ -13,7 +13,18 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
+
+// Filter out the specific warning message
+warn.__proto__.filter = (msg) => {
+    if (msg.includes('Vue received a Component that was made a reactive object')) {
+        return false;
+    }
+    return true;
+};
+
+
 const emitter = mitt();
+export default emitter
 app.config.globalProperties.emitter = emitter;
 
 
