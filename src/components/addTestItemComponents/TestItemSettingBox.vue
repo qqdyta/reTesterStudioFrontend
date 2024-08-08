@@ -1,6 +1,6 @@
 <script>
 /* eslint-disable */
-import { ref, onMounted, onUnmounted, getCurrentInstance  } from 'vue'
+import {ref, onMounted, onUnmounted, getCurrentInstance, markRaw} from 'vue'
 import CurrentTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/CurrentTestItemSettingBox.vue";
 import EthernetTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/EthernetTestItemSettingBox.vue";
 import VoltageTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/VoltageTestItemSettingBox.vue";
@@ -42,9 +42,9 @@ export default {
     const eventBus = instance.appContext.config.globalProperties.emitter
     const setComponent = (component) => {
       if(component !== null){
-        console.log('got open setting page event', component)
-        currentIndex.value = component[1]
-        currentComponent.value = {
+        //console.log('got open setting page event', component)
+        currentIndex.value = markRaw(component[1])
+        currentComponent.value =markRaw({
           'voltage': VoltageTestItemSettingBox,
           'current': CurrentTestItemSettingBox,
           'dmmConfig': LoadTestItemSettingBox,
@@ -56,7 +56,7 @@ export default {
           'wait': WaitTestItemSettingBox,
           'serialPort': SerialTestItemSettingBox,
           'ethernet': EthernetTestItemSettingBox,
-        }[component[0]]
+        }[component[0]])
       }else{
         currentComponent.value = null
       }
@@ -97,7 +97,7 @@ export default {
 .box {
   margin: 15px;
   width: 40vh;
-  height: 40vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
