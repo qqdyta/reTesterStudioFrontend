@@ -17,11 +17,9 @@ const computedTitle = computed(() => {
   return $testItemDict[props.label]['title']
 })
 
-const { onNodeClick } = useVueFlow()
+//const { onNodeClick } = useVueFlow()
 
-onNodeClick(({node}) => {
-  console.log('Node Click', node)
-})
+
 
 </script>
 
