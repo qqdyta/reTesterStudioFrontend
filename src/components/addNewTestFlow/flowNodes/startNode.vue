@@ -9,7 +9,6 @@ const props = defineProps(['label'])
 const $testItemDict = inject('$testItemDict')
 
 const computedBackgroundColor = computed(() => {
-  console.log('the props is ', props)
   return $testItemDict[props.label]['color']
 })
 
@@ -25,7 +24,7 @@ const computedTitle = computed(() => {
 
 <template>
   <div class="node-box" :style="{backgroundColor: computedBackgroundColor}">
-    <Handle type="target" :position="Position.Top" />
+    <Handle type="target" class="vue-flow__handle" :position="Position.Top" />
     <div>{{ computedTitle }}</div>
     <Handle type="source" :position="Position.Bottom" />
   </div>
@@ -38,6 +37,14 @@ const computedTitle = computed(() => {
   border-radius: 10px;
   width: 220px;
   height: 80px;
+}
+.vue-flow__handle {
+  height:5px;
+  width:15px;
+  border-radius:4px;
+  border: 2px solid #5d5d5d;
+  background-color: #9b59b6;
+
 }
 
 </style>
