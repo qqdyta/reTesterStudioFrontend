@@ -27,7 +27,7 @@ export default {
   </div>
   <div class="main">
     <el-tabs  v-model="activeTab" class="demo-tabs"  >
-      <el-tab-pane label="信号" name="osc">
+      <el-tab-pane label="采集" name="osc">
         <!-- <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard> -->
         <addTestItemCard class="item-card"  :setType="'oscGetWave'"  @click="addNewTestItem('oscGetWave')"></addTestItemCard>
         <!-- <addTestItemCard class="item-card"  :setType="'oscGetDelta'"  @click="addNewTestItem('oscGetDelta')"></addTestItemCard>  -->
