@@ -14,6 +14,7 @@ import "../assets/main.css"
 import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
 import flowBox from "@/components/addNewTestFlow/flowBox.vue";
 import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
+import { getCurrentInstance } from "vue";
 export default {
   name: 'App',
   components: {
@@ -44,7 +45,10 @@ export default {
     this.emitter.off('addNewTestItem')
   },
   methods: {
+
     addNewTestItem(data) {
+
+
       const TEST_DATA = {
         id: this.counter++,
         setType: data,
@@ -55,12 +59,13 @@ export default {
         class: 'light',
         type: "start"
       }
+      this.emitter.emit('addNewTestProgress', TEST_DATA)
       this.yPosition += 100
       this.component.push(TEST_DATA)
-      console.log('the components is ', this.component)
+      console.log('the components is ', JSON.stringify(this.component))
     },
     openSettingPage(component) {
-      console.log('the component is ', component)
+
       this.$emit('openSettingPage', component)
     }
   }
