@@ -67,12 +67,9 @@ export default {
   },*/
   mounted() {
     this.emitter.on('addNewTestItem', (data) => {
-      console.log('addNewTestItem', data)
       this.addNewTestItem(data)
     });
     this.emitter.on('removeTestItem', (data) => {
-      console.log('removeTestItem', data)
-      console.log('the components is ', this.component)
       //const TARGET_INDEX = this.component.findIndex(item => item.index === data)
 
       this.component = this.component.filter(item => item.index !== data)
@@ -241,5 +238,7 @@ export default {
   height:95vh;
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
+
+
 
 </style>
