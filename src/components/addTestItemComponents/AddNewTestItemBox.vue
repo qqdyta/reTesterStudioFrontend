@@ -8,7 +8,13 @@ export default {
   data() {
     return {
       show: false,
-      activeTab: 'osc'
+      activeTab: 'osc',
+      cards: [
+        {key: '采集', setType:'osc', item: ['oscGetWave', 'voltage', "current"]},
+        {key: '电源', setType:'psld', item: ['loadOn', 'loadOff', 'powerSupplyOn', 'powerSupplyOff']},
+        {key: '接口', setType:'spnw', item: ['serialPort', 'ethernet']},
+        {key: '其他', setType:'other', item: ['wait']},
+      ]
     }
   },
   methods: {
@@ -26,30 +32,9 @@ export default {
     添加新测试项目
   </div>
   <div class="main">
-    <el-tabs  v-model="activeTab" class="demo-tabs"  >
-      <el-tab-pane label="采集" name="osc">
-        <!-- <addTestItemCard class="item-card"  :setType="'oscilloscope'"  @click="addNewTestItem('oscilloscope')"></addTestItemCard> -->
-        <addTestItemCard class="item-card"  :setType="'oscGetWave'"  @click="addNewTestItem('oscGetWave')"></addTestItemCard>
-        <!-- <addTestItemCard class="item-card"  :setType="'oscGetDelta'"  @click="addNewTestItem('oscGetDelta')"></addTestItemCard>  -->
-        <addTestItemCard class="item-card"  :setType="'voltage'"  @click="addNewTestItem('voltage')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'current'"  @click="addNewTestItem('current')"></addTestItemCard>
-        <!--<addTestItemCard class="item-card"  :setType="'dmmConfig'"  @click="addNewTestItem('dmmConfig')"></addTestItemCard> -->
-      </el-tab-pane>
-      <el-tab-pane label="电源" name="psld">
-        <!-- <addTestItemCard class="item-card"  :setType="'load'"  @click="addNewTestItem('load')"></addTestItemCard> -->
-        <addTestItemCard class="item-card"  :setType="'loadOn'"  @click="addNewTestItem('loadOn')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'loadOff'"  @click="addNewTestItem('loadOff')"></addTestItemCard>
-        <!--<addTestItemCard class="item-card"  :setType="'powerSupplySet'"  @click="addNewTestItem('powerSupplySet')"></addTestItemCard> -->
-        <addTestItemCard class="item-card"  :setType="'powerSupplyOn'"  @click="addNewTestItem('powerSupplyOn')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'powerSupplyOff'"  @click="addNewTestItem('powerSupplyOff')"></addTestItemCard>
-
-      </el-tab-pane>
-      <el-tab-pane label="接口" name="spnw">
-        <addTestItemCard class="item-card"  :setType="'serialPort'"  @click="addNewTestItem('serialPort')"></addTestItemCard>
-        <addTestItemCard class="item-card"  :setType="'ethernet'"  @click="addNewTestItem('ethernet')"></addTestItemCard>
-      </el-tab-pane>
-      <el-tab-pane label="其他" name="other">
-        <addTestItemCard class="item-card"  :setType="'wait'"  @click="addNewTestItem('wait')"></addTestItemCard>
+    <el-tabs  v-model="activeTab" class="demo-tabs">
+      <el-tab-pane v-for="(group, index) in this.cards" :key="index" :label="group['key']" :name="group.setType">
+        <addTestItemCard class="add-test-item-card" v-for="(item, index) in group['item']" :key="index" :setType="item" @click="addNewTestItem(item)"></addTestItemCard>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -69,6 +54,10 @@ export default {
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 
 }
+.add-test-item-card{
+   margin-top: 15px;
+}
+
 .title {
   display: flex;
   justify-content: center;
