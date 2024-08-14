@@ -87,7 +87,7 @@ export default {
         index: this.counter
       }
       this.component.push(TEST_DATA)
-      console.log('the components is ', this.component)
+      //console.log('the components is ', this.component)
     },
     openSettingPage(component) {
       console.log('the component is ', component)
