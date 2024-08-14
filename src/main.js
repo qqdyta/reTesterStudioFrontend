@@ -38,6 +38,8 @@ const testItemSettingData = reactive({
 app.config.globalProperties.testItemSettingData = testItemSettingData
 
 
+
+
 const TEST_ITEM_DICT = {
     'voltage':  {color: 'var(--color-dmm)', title: '电压测试'},
     'current':  {color: 'var(--color-dmm)', title: '电流测试'},
