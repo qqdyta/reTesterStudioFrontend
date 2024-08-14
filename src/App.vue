@@ -9,10 +9,12 @@
 </template>
 
 <script>
+/* eslint-disable */
 import "./assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
 import LeftSideBar from "@/components/LeftSideBar.vue"
-import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue";
+import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue"
+
 export default {
   name: 'App',
   components: {
