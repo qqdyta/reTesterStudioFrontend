@@ -3,6 +3,7 @@
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
     <div class="right-box">
+      <component :is="rightBox"></component>
       <add-new-test-process-page class="add-new-test-process-page"></add-new-test-process-page>
     </div>
   </div>
@@ -14,6 +15,10 @@ import "./assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
 import LeftSideBar from "@/components/LeftSideBar.vue"
 import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue"
+import HomePage from "@/components/HomePage.vue"
+import LogPage from "@/components/LogPage.vue"
+import TestPage from "@/components/TestPage.vue";
+import {ref, onMounted, onUnmounted, getCurrentInstance, markRaw} from 'vue'
 
 export default {
   name: 'App',
@@ -21,6 +26,9 @@ export default {
     addNewTestProcessPage,
     HeaderBar,
     LeftSideBar,
+    HomePage,
+    LogPage,
+    TestPage
   },
   data(){
     return {
@@ -56,6 +64,31 @@ export default {
       console.log('the component is ', component)
       this.$emit('openSettingPage', component)
     }
+  },
+  setup(){
+    const currentComponent = ref(null)
+    const instance = getCurrentInstance()
+    const eventBus = instance.appContext.config.globalProperties.emitter
+    const setComponent = (component) => {
+      if(component !== null){
+        console.log('got open setting page event', component)
+        component.value = markRaw(component[1])
+        currentComponent.value = markRaw({
+          'home': HomePage,
+          'log': LogPage,
+          'test': TestPage,
+          'add': addNewTestProcessPage
+        }[component[0]])
+      }
+    }
+
+    onMounted(() => {
+      eventBus.on('settingRightBox', setComponent);
+    })
+
+    onUnmounted(() => {
+      eventBus.off('settingRightBox', setComponent);
+    })
   }
 }
 </script>
