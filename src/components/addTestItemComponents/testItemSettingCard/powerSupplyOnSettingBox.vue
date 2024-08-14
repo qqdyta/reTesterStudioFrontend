@@ -106,7 +106,7 @@ export default {
       <div>
         <el-row>
           <el-col :span="24">
-            <page-setting-button :cardIndex="this.cardIndex"></page-setting-button>
+            <page-setting-button :cardIndex="this.cardIndex" :process-data="this.testItemSettingData"></page-setting-button>
           </el-col>
         </el-row>
       </div>
