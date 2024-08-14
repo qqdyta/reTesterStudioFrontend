@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import "./assets/main.css"
+import "../assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
 import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
 import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
