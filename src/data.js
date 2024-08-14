@@ -17,7 +17,7 @@ class TestProcess {
             console.log('updateProcessData: ', data)
             const TYPE = data.type
             console.log('the type is: ', TYPE)
-            if(TYPE == 'remove'){
+            if(TYPE == 'delete'){
                 this.deleteProcess(data)
             }else if( TYPE == 'save' ){
                 this.updateProcess(data)
@@ -36,13 +36,26 @@ class TestProcess {
     }
 
     deleteProcess(data){
-
+        console.log('the should delete data is: ', data)
+        const INDEX = data.index
+        this.testData.forEach((item) => {
+            if(item['index'] == INDEX){
+                const INDEX = this.testData.indexOf(item)
+                this.testData.splice(INDEX, 1)
+            }
+        })
+        console.log('the test data is: ', this.testData)
     }
 
     updateProcess(data){
-
+        const INDEX = data.index
+        this.testData.forEach((item) => {
+            if(item['index'] == INDEX){
+                item['data'] = data.data
+            }
+        })
+        console.log('the test data is: ', this.testData)
     }
-
     updateEdge(){
 
     }
