@@ -12,11 +12,7 @@ const dark = ref(false)
 const nodeTypes = {
   start: markRaw(StartNode)
 }
-
 let last_add_node_id = -1
-
-
-
 
 onInit((vueFlowInstance) => {
   // instance is the same as the return of `useVueFlow`
@@ -37,6 +33,11 @@ onMounted(()=> {
         target: data.id.toString()
       })
     }
+    emitter.emit('updateProcessData', {type: 'add', data: {
+        id: ( data.id - 1 ) + '_2_'+data.id,
+        source: (data.id - 1).toString(),
+        target: data.id.toString()
+      }})
     console.log('the edged is ', initialEdges.value)
   })
 
@@ -44,7 +45,6 @@ onMounted(()=> {
     initialNodes.value.forEach((item, index) => {
 
       if(item.index === data){
-
         //initialNodes.value = initialNodes.value.filter(item => item.index !== data)
         const SHOULD_DELETE_NODE = findNode((item.id).toString())
         removeNodes(SHOULD_DELETE_NODE)
@@ -84,6 +84,7 @@ onConnect((connection) => {
     source: connection.source,
     target: connection.target
   })
+  emitter.emit('updateProcessData', {type: 'edges', data: initialEdges.value})
 })
 
 </script>
