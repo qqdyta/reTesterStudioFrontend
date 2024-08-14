@@ -33,11 +33,7 @@ onMounted(()=> {
         target: data.id.toString()
       })
     }
-    emitter.emit('updateProcessData', {type: 'add', data: {
-        id: ( data.id - 1 ) + '_2_'+data.id,
-        source: (data.id - 1).toString(),
-        target: data.id.toString()
-      }})
+    emitter.emit('updateProcessData', {type: 'add', data: data})
     console.log('the edged is ', initialEdges.value)
   })
 
