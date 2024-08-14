@@ -5,12 +5,18 @@ export default {
     cardIndex: {
       type: Number,
       default: 0
+    },
+    processData:{
+      type: Object
     }
   },
   methods: {
     removeMe() {
-      console.log('removeMe', this.cardIndex)
       this.emitter.emit('removeTestItem', this.cardIndex)
+      this.emitter.emit('updateProcessData', {type: 'delete', data: this.processData})
+    },
+    updateProcessData() {
+      this.emitter.emit('updateProcessData', {type: 'save', data: this.processData})
     }
   },
   emits: ['click', 'removeTestItem']
@@ -26,7 +32,7 @@ export default {
       </el-col>
       <el-col :span="8">
         <div>
-          <el-button type="primary" >保存</el-button>
+          <el-button type="primary" @click="updateProcessData" >保存</el-button>
         </div>
       </el-col>
     </el-row>
