@@ -9,6 +9,8 @@
     --color-wait: #969696;
     --color-power-supply: #2ecc71;
     --color-load: #e67e22;
+    --color-start: #2ecc71;
+    --color-end: #2ecc71;
 }
 
 .z-up-shadow {
