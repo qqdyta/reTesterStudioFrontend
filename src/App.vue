@@ -3,8 +3,7 @@
   <div class="downer">
     <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
     <div class="right-box">
-      <component :is="rightBox"></component>
-      <add-new-test-process-page class="add-new-test-process-page"></add-new-test-process-page>
+      <component :is="currentComponent"  class="add-new-test-process-page"></component>
     </div>
   </div>
 </template>
@@ -18,6 +17,7 @@ import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue"
 import HomePage from "@/components/HomePage.vue"
 import LogPage from "@/components/LogPage.vue"
 import TestPage from "@/components/TestPage.vue";
+import settingPage from "@/components/settingPage.vue";
 import {ref, onMounted, onUnmounted, getCurrentInstance, markRaw} from 'vue'
 
 export default {
@@ -28,7 +28,8 @@ export default {
     LeftSideBar,
     HomePage,
     LogPage,
-    TestPage
+    TestPage,
+    settingPage
   },
   data(){
     return {
@@ -67,17 +68,18 @@ export default {
   },
   setup(){
     const currentComponent = ref(null)
+    const boxClass = ref(null)
     const instance = getCurrentInstance()
     const eventBus = instance.appContext.config.globalProperties.emitter
     const setComponent = (component) => {
       if(component !== null){
-        console.log('got open setting page event', component)
-        component.value = markRaw(component[1])
+        console.log('got open setting page event', component[0])
         currentComponent.value = markRaw({
           'home': HomePage,
           'log': LogPage,
           'test': TestPage,
-          'add': addNewTestProcessPage
+          'add': addNewTestProcessPage,
+          'set': settingPage
         }[component[0]])
       }
     }
@@ -89,15 +91,22 @@ export default {
     onUnmounted(() => {
       eventBus.off('settingRightBox', setComponent);
     })
+
+    return {
+      boxClass,
+      currentComponent
+    }
   }
 }
 </script>
 
 <style>
+
 .add-new-test-process-page {
   width: 170vh;
   height: 95vh;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -105,26 +114,27 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 .header-box {
   width: 100%;
   height: 5vh;
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
 
+
 .downer {
   display: flex;
   flex: 1;
 }
+
 .left-bar-box{
   width: 100vh;
 }
+
 
 .left-bar-box {
   width: 60px;
   height:95vh;
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
-
-
-
 </style>
