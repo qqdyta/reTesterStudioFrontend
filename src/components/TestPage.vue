@@ -1,30 +1,14 @@
 <template>
-  <div class="header-box"><HeaderBar></HeaderBar></div>
-  <div class="downer">
-    <div class="left-bar-box"><LeftSideBar></LeftSideBar></div>
-    <div class="main-box"><addNewTestItemBox></addNewTestItemBox></div>
-    <div class="main-box"><addedTestItemBox></addedTestItemBox></div>
-    <div class="main-box"><TestItemSettingBox></TestItemSettingBox></div>
-  </div>
-
+  <div>HelloWorld</div>
 </template>
 
 <script>
 import "../assets/main.css"
-import HeaderBar from "@/components/HeaderBar.vue"
-import addNewTestItemBox from "@/components/addTestItemComponents/AddNewTestItemBox.vue"
-import addedTestItemBox from "@/components/addTestItemComponents/addedTestItemBox.vue";
-import LeftSideBar from "@/components/LeftSideBar.vue"
-import TestItemSettingBox from "@/components/addTestItemComponents/TestItemSettingBox.vue"
 
 export default {
   name: 'TestPage',
   components: {
-    TestItemSettingBox,
-    HeaderBar,
-    addNewTestItemBox,
-    LeftSideBar,
-    addedTestItemBox
+
   }
 }
 </script>
