@@ -55,7 +55,9 @@ const TEST_ITEM_DICT = {
     'powerSupplyOff':{color: 'var(--color-power-supply)', title: '电源关闭'},
     'load': {color: 'var(--color-load)', title: '负载设置'},
     'loadOn': {color: 'var(--color-load)', title: '负载开启'},
-    'loadOff': {color: 'var(--color-load)', title: '负载关闭'}
+    'loadOff': {color: 'var(--color-load)', title: '负载关闭'},
+    'onStart': {color: 'var(--color-start)', title: '测试开始'},
+    'onEnd': {color: 'var(--color-end)', title: '测试结束'},
 }
 app.config.globalProperties.$testItemDict = TEST_ITEM_DICT
 app.provide('$testItemDict', TEST_ITEM_DICT);
