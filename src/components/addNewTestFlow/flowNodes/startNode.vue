@@ -24,7 +24,6 @@ const computedTitle = computed(() => {
 
 <template>
   <div class="node-box" :style="{backgroundColor: computedBackgroundColor}">
-    <Handle type="target" class="vue-flow__handle_top" :style="{backgroundColor: computedBackgroundColor}" :position="Position.Top" />
     <div>{{ computedTitle }}</div>
     <Handle type="source" class="vue-flow__handle_bottom" :style="{backgroundColor: computedBackgroundColor}" :position="Position.Bottom" />
   </div>
