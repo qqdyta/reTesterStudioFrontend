@@ -13,7 +13,7 @@ export default {
         {key: '采集', setType:'osc', item: ['oscGetWave', 'voltage', "current"]},
         {key: '电源', setType:'psld', item: ['loadOn', 'loadOff', 'powerSupplyOn', 'powerSupplyOff']},
         {key: '接口', setType:'spnw', item: ['serialPort', 'ethernet']},
-        {key: '其他', setType:'other', item: ['wait']},
+        {key: '其他', setType:'other', item: ['wait', 'onStart', 'onEnd']},
       ]
     }
   },
