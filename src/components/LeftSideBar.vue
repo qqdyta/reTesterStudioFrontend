@@ -15,7 +15,24 @@ export default {
   },
   methods: {
     openMainPage() {
+      this.emitter.emit('settingRightBox', ['home'])
       console.log('openMainPage')
+    },
+    openTestPage() {
+      this.emitter.emit('settingRightBox', ['test'])
+      console.log('openTestPage')
+    },
+    openAddPage() {
+      this.emitter.emit('settingRightBox', ['add'])
+      console.log('openAddPage')
+    },
+    openLOGPage() {
+      this.emitter.emit('settingRightBox', ['log'])
+      console.log('openLOGPage')
+    },
+    openSettingPage() {
+      this.emitter.emit('settingRightBox', ['set'])
+      console.log('openSettingPage')
     }
   }
 }
@@ -31,10 +48,9 @@ export default {
         <div class="menu-icon-text" >主 页</div>
       </div>
     </div>
-
     <div>
       <div class="menu-option">
-        <div class="menu-icon-box">
+        <div class="menu-icon-box" @click="openTestPage">
           <el-icon :size="30" ><Aim /></el-icon>
         </div>
         <div class="menu-icon-text">测 试</div>
@@ -43,7 +59,7 @@ export default {
 
     <div>
       <div class="menu-option">
-        <div class="menu-icon-box">
+        <div class="menu-icon-box" @click="openAddPage">
           <el-icon :size="30" ><Edit /></el-icon>
         </div>
         <div class="menu-icon-text">新 增</div>
@@ -52,16 +68,16 @@ export default {
 
     <div>
       <div class="menu-option">
-        <div class="menu-icon-box">
+        <div class="menu-icon-box" @click="openLOGPage">
           <el-icon :size="30" ><MessageBox /></el-icon>
         </div>
-        <div class="menu-icon-text">记 录</div>
+        <div class="menu-icon-text">L O G</div>
       </div>
     </div>
 
     <div>
       <div class="menu-option">
-        <div class="menu-icon-box">
+        <div class="menu-icon-box" @click="openSettingPage">
           <el-icon :size="30" ><Setting /></el-icon>
         </div>
         <div class="menu-icon-text">设 置</div>
