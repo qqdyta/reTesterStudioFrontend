@@ -15,7 +15,8 @@ import loadOnSettingBox from "@/components/addTestItemComponents/testItemSetting
 import loadOffSettingBox from "@/components/addTestItemComponents/testItemSettingCard/loadOffSettingBox.vue";
 import powerSupplyOnSettingBox from "@/components/addTestItemComponents/testItemSettingCard/powerSupplyOnSettingBox.vue";
 import powerSupplyOffSettingBox from "@/components/addTestItemComponents/testItemSettingCard/powerSupplyOffSettingBox.vue";
-
+import testStartSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testStartSettingBox.vue";
+import testFinishSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testFinishSettingBox.vue";
 
 export default {
   name: "TestItemSettingBox",
@@ -33,6 +34,8 @@ export default {
     loadOffSettingBox,
     powerSupplyOnSettingBox,
     powerSupplyOffSettingBox,
+    testStartSettingBox,
+    testFinishSettingBox
   },
 
   setup() {
@@ -56,6 +59,8 @@ export default {
           'wait': WaitTestItemSettingBox,
           'serialPort': SerialTestItemSettingBox,
           'ethernet': EthernetTestItemSettingBox,
+          'onStart': testStartSettingBox,
+          'onEnd': testFinishSettingBox
         }[component[0]])
       }else{
         currentComponent.value = null
@@ -74,7 +79,16 @@ export default {
       currentIndex
     }
   },
+  methods:{
+    cleanData(){
+      this.emitter.emit('updateProcessData', {type: 'cleanUp', data: null})
+    },
 
+    submitData(){
+      this.emitter.emit('updateProcessData', {type: 'submit', data: null})
+    }
+
+  }
 }
 </script>
 
@@ -84,9 +98,11 @@ export default {
   </div>
   <div class="submit-button-box">
     <el-row>
-      <el-col :span="12"></el-col>
       <el-col :span="12">
-        <el-button class="submit-button z-up-shadow" type="basic White">保存</el-button>
+        <el-button class="clean-button z-up-shadow" type="basic White" @click="cleanData">清除</el-button>
+      </el-col>
+      <el-col :span="12">
+        <el-button class="submit-button z-up-shadow" type="basic White" @click="submitData">保存</el-button>
       </el-col>
     </el-row>
   </div>
@@ -116,6 +132,25 @@ export default {
 }
 
 .submit-button:hover {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  font-size: 26px;
+  font-weight: lighter;
+  color: #606266
+}
+
+.clean-button {
+  margin-top: 10px;
+  width: 80px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 50px 10px  10px 50px;
+  border: 1px solid #ffffff;
+}
+
+.clean-button:hover
+{
   background-color: #ffffff;
   border: 1px solid #ffffff;
   font-size: 26px;
