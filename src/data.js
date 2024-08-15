@@ -8,7 +8,6 @@
 
 import emitter from "@/main";
 
-
 class TestProcess {
     constructor() {
         this.testData = []
@@ -25,6 +24,10 @@ class TestProcess {
                 this.addProcess(data)
             }else if(TYPE == 'edge'){
                 this.updateEdge()
+            }else if(TYPE == 'submit'){
+                this.submitData().then((data) => {
+                    console.log('the submit data is: ', data)
+                })
             }
         })
     }
@@ -56,8 +59,34 @@ class TestProcess {
         })
         console.log('the test data is: ', this.testData)
     }
+
     updateEdge(){
 
+    }
+
+    async submitData(){
+        const URL = 'http://127.0.0.1:8000/processAdd/'
+        const response = await fetch(URL, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(this.testData), // body data type must match "Content-Type" header
+        });
+        console.log('the response is: ', response)
+        const responseData = await response.json()
+        console.log('the response data is: ', responseData)
+        return response; //
+    }
+
+    cleanUpData(){
+        this.testData = []
     }
 }
 
