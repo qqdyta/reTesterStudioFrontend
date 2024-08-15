@@ -62,7 +62,6 @@ export default {
 
 <template>
   <div class="main" :style="{ backgroundColor: setColor}" @click="$emit('click')"><div hidden id="index"></div>{{ setTitle }}</div>
-
 </template>
 <style scoped>
 .main {
