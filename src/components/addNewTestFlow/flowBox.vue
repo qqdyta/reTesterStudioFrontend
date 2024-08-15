@@ -5,24 +5,33 @@ import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { MiniMap } from '@vue-flow/minimap'
 import StartNode from "@/components/addNewTestFlow/flowNodes/startNode.vue"
+import FinshNode from "@/components/addNewTestFlow/flowNodes/finishNode.vue"
+import TestNode from "@/components/addNewTestFlow/flowNodes/testNode.vue"
 import emitter from "@/main";
 const { onInit, onNodeDragStop, onConnect, addEdges, onNodeClick, addNodes, removeNodes, findNode, getEdges } = useVueFlow()
 
 const dark = ref(false)
+
 const nodeTypes = {
-  start: markRaw(StartNode)
+  start: markRaw(StartNode),
+  finish: markRaw(FinshNode),
+  test: markRaw(TestNode)
 }
+
 let last_add_node_id = -1
 
 onInit((vueFlowInstance) => {
   // instance is the same as the return of `useVueFlow`
   vueFlowInstance.fitView()
 })
+
 const initialNodes = ref([])
 const initialEdges = ref([])
+
 onMounted(()=> {
   emitter.on('addNewTestProgress', (data) => {
     initialNodes.value = [...initialNodes.value, data]
+    console.log('the data is' , data)
     last_add_node_id = data.id
     addNodes(data)
     if(data.id > 0){
@@ -55,7 +64,6 @@ onMounted(()=> {
 const openSettings = (component) => {
   emitter.emit('openSettingPage', [component.setType, component.index])
 }
-
 
 const steps = defineProps({
   progress: {
@@ -100,6 +108,7 @@ onConnect((connection) => {
     <MiniMap class="mini-map"/>
   </VueFlow>
 </template>
+
 <style scoped>
 @import '@vue-flow/core/dist/style.css';
 .basic-flow.dark {
