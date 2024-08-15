@@ -45,6 +45,12 @@ export default {
   methods: {
 
     addNewTestItem(data) {
+      let nodeType = 'test'
+      if(data == 'onStart'){
+        nodeType = 'start'
+      }else if(data == 'onEnd'){
+        nodeType = 'finish'
+      }
 
       const TEST_DATA = {
         id: this.counter++,
@@ -54,7 +60,7 @@ export default {
         position: {x: this.xPosition , y: this.yPosition},
         data: {label: 'TestNode' + this.counter},
         class: 'light',
-        type: "start"
+        type: nodeType
       }
       this.emitter.emit('addNewTestProgress', TEST_DATA)
       this.yPosition += 100
