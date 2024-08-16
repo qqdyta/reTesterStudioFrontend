@@ -33,6 +33,22 @@ export default {
         Mode: 'CC'
       }
     }
+  },
+  mounted() {
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Start getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
+    console.log(' Start mounted')
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex})
+  },
+  unmounted() {
+    console.log('Start unmounted')
+    this.$emitter.off('getProcessData')
   }
 }
 </script>
