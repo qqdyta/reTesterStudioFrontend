@@ -16,6 +16,7 @@ class TestProcess {
         this.edges = []
         emitter.on('updateProcessData', (data) => {
             console.log('updateProcessData: ', data)
+            console.log('the this.testData is : ', this.testData)
             const TYPE = data.type
             console.log('the type is: ', TYPE)
             if(TYPE == 'delete'){
@@ -31,10 +32,11 @@ class TestProcess {
                     console.log('the submit data is: ', data)
                 })
             }else if(TYPE == 'get'){
-                console.log('is a get')
+                console.log('is a get', data.CardIndex)
                 const INDEX = data.CardIndex
                 this.testData.forEach((item) => {
                     if(item['index'] == INDEX){
+                        console.log('got the index')
                         emitter.emit('getProcessData', {cardIndex: INDEX, data: item})
                     }
                 })
