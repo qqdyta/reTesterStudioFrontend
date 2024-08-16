@@ -55,6 +55,7 @@ const TEST_ITEM_DICT = {
     'loadOff': {color: 'var(--color-load)', title: '负载关闭'},
     'onStart': {color: 'var(--color-start)', title: '测试开始'},
     'onEnd': {color: 'var(--color-end)', title: '测试结束'},
+    'scanner': {color: 'var(--color-scanner)', title: '扫码输入'},
 }
 app.config.globalProperties.$testItemDict = TEST_ITEM_DICT
 app.provide('$testItemDict', TEST_ITEM_DICT);
