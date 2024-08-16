@@ -12,11 +12,11 @@ export default {
   },
   methods: {
     removeMe() {
-      this.emitter.emit('removeTestItem', this.cardIndex)
-      this.emitter.emit('updateProcessData', {type: 'delete', data: this.processData, index: this.cardIndex})
+      this.$emitter.emit('removeTestItem', this.cardIndex)
+      this.$emitter.emit('updateProcessData', {type: 'delete', data: this.processData, index: this.cardIndex})
     },
     updateProcessData() {
-      this.emitter.emit('updateProcessData', {type: 'save', data: this.processData, index: this.cardIndex})
+      this.$emitter.emit('updateProcessData', {type: 'save', data: this.processData, index: this.cardIndex})
     }
   },
   emits: ['click', 'removeTestItem']
