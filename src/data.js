@@ -7,6 +7,8 @@
 * */
 
 import emitter from "@/main";
+import { ElNotification } from 'element-plus'
+
 
 class TestProcess {
     constructor() {
@@ -27,6 +29,14 @@ class TestProcess {
             }else if(TYPE == 'submit'){
                 this.submitData().then((data) => {
                     console.log('the submit data is: ', data)
+                })
+            }else if(TYPE == 'get'){
+                console.log('is a get')
+                const INDEX = data.CardIndex
+                this.testData.forEach((item) => {
+                    if(item['index'] == INDEX){
+                        emitter.emit('getProcessData', {cardIndex: INDEX, data: item})
+                    }
                 })
             }
         })
@@ -65,7 +75,7 @@ class TestProcess {
     }
 
     async submitData(){
-        const URL = 'http://127.0.0.1:8000/processAdd/'
+        const URL = 'http://127.0.0.1:8000/' + 'processAdd/'
         const response = await fetch(URL, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -82,6 +92,8 @@ class TestProcess {
         console.log('the response is: ', response)
         const responseData = await response.json()
         console.log('the response data is: ', responseData)
+        const RESULT = responseData['result']
+        RESULT ? notify_success('新增测试方案成功') : notify_warning('新增测试方案失败')
         return response; //
     }
 
@@ -91,3 +103,55 @@ class TestProcess {
 }
 
 const TEST_PROGRESS = new TestProcess()
+
+
+function notify_success(title, message = null){
+    ElNotification({
+        title: title,
+        message: message === null ? '操作成功' : message,
+        type: 'success',
+    })
+}
+
+function notify_warning(title, message = null){
+    ElNotification({
+        title: title,
+        message: message === null ? '操作失败' : message,
+        type: 'warning',
+    })
+}
+
+
+
+class Sender {
+
+    constructor() {
+        emitter.on('sender', (data) => {
+            console.log('the sender data is: ', data)
+            const TYPE = data.type
+            if(TYPE == 'success'){
+                this.notify_success(data.title, data.message)
+            }else{
+                this.notify_warning(data.title, data.message)
+            }
+        })
+    }
+
+    notify_warning(title, message = null){
+        ElNotification({
+            title: title,
+            message: message === null ? '操作失败' : message,
+            type: 'warning',
+        })
+    }
+
+    notify_success(title, message = null){
+        ElNotification({
+            title: title,
+            message: message === null ? '操作成功' : message,
+            type: 'success',
+        })
+    }
+}
+
+const SENDER = new Sender()
