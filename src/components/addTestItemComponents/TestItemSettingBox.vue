@@ -42,7 +42,7 @@ export default {
     const currentComponent = ref(null)
     const currentIndex = ref(0)
     const instance = getCurrentInstance()
-    const eventBus = instance.appContext.config.globalProperties.emitter
+    const eventBus = instance.appContext.config.globalProperties.$emitter
     const setComponent = (component) => {
       if(component !== null){
         //console.log('got open setting page event', component)
@@ -68,6 +68,9 @@ export default {
     }
     onMounted(() => {
       eventBus.on('openSettingPage', setComponent);
+      eventBus.on('updateProcessData', (data) => {
+        console.log('the data is ', data)
+      })
     })
 
     onUnmounted(() => {
@@ -76,16 +79,16 @@ export default {
 
     return {
       currentComponent,
-      currentIndex
+      currentIndex,
     }
   },
   methods:{
     cleanData(){
-      this.emitter.emit('updateProcessData', {type: 'cleanUp', data: null})
+      this.$emitter.emit('updateProcessData', {type: 'cleanUp', data: null})
     },
 
     submitData(){
-      this.emitter.emit('updateProcessData', {type: 'submit', data: null})
+      this.$emitter.emit('updateProcessData', {type: 'submit', data: null})
     }
 
   }
