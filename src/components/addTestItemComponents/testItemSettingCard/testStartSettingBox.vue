@@ -16,9 +16,9 @@ export default {
   data() {
     return {
       testItemSettingData: {
-        testName: "产品测试",
+        stepName: "测试",
         stepIndex: 0,
-        testDescription: "测试描述",
+        stepDescription: "测试描述",
       }
     }
   },
@@ -34,6 +34,14 @@ export default {
     })
   },
   mounted() {
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Start getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
     console.log(' Start mounted')
     this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex})
   },
@@ -50,14 +58,14 @@ export default {
       <el-row>
         <el-col :span="24">
           <el-form-item label="测试名称">
-            <el-input v-model="testItemSettingData.testName" />
+            <el-input v-model="testItemSettingData.stepName" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-form-item label="测试描述">
-            <el-input v-model="testItemSettingData.testDescription" />
+            <el-input v-model="testItemSettingData.stepDescription" />
           </el-form-item>
         </el-col>
       </el-row>
