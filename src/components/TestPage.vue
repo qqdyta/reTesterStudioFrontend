@@ -1,36 +1,23 @@
 <template>
-  <div>HelloWorld</div>
+  <div class="main-box">
+    <div class="inner-box">
+      <testing-item-box class="testing-item-box"></testing-item-box>
+    </div>
+  </div>
 </template>
 
 <script>
 import "../assets/main.css"
-
+import TestingItemBox from "@/components/testPageComponents/TestingItemBox.vue";
 export default {
   name: 'TestPage',
   components: {
-
+    TestingItemBox
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.header-box {
-  width: 100%;
-  height: 5vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
-}
-
-.downer {
-  display: flex;
-  flex: 1;
-}
+<style scoped>
 
 .main-box {
   flex: 1;
@@ -38,10 +25,19 @@ export default {
   height: 95vh;
 }
 
-.left-bar-box {
-  width: 60px;
-  height:95vh;
-  box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+.inner-box {
+  padding: 15px;
 }
 
+.testing-item-box{
+  width: 30%;
+}
+
+::-webkit-scrollbar-button {
+  display: none
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent; /* 隐藏角落区域 */
+}
 </style>
