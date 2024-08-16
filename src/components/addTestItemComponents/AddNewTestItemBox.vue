@@ -20,7 +20,7 @@ export default {
   methods: {
     addNewTestItem(data) {
       console.log(data)
-      this.emitter.emit('addNewTestItem', data)
+      this.$emitter.emit('addNewTestItem', data)
     }
   }
 }
