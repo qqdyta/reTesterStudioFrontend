@@ -1,6 +1,6 @@
 <template>
-  <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-    <el-row v-for="i in count" :key="i" class="infinite-list-item">
+  <ul v-infinite-scroll="load" v-loading="props.onLoad" class="infinite-list" style="overflow: auto">
+    <el-row v-for="step in props.testPlan" :key="step.id" class="infinite-list-item" @click="showTestingItemDetail">
       <el-col :span="18">{{ i }}</el-col>
       <el-col :span="6">成功</el-col>
     </el-row>
@@ -9,11 +9,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref, defineProps, watch} from 'vue'
 const count = ref(0)
 const load = () => {
   count.value += 2
 }
+
+const props = defineProps({
+  testPlan: {
+    type: Object,
+    default: () => {
+      return {step:[]}
+    },
+    onLoad: {
+      type: Boolean,
+      default: true
+    }
+  }
+})
+
+watch(() => props.testPlan, (newVal) => {
+  console.log('the new value is ', newVal)
+})
+
+watch(() => props.onLoad, (newVal) => {
+  console.log('the new value is ', newVal)
+})
+
+
+function showTestingItemDetail(){
+  console.log('show the testing item detail')
+}
+
 </script>
 
 <style>
