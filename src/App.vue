@@ -38,10 +38,10 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('addNewTestItem', (data) => {
+    this.$emitter.on('addNewTestItem', (data) => {
       this.addNewTestItem(data)
     });
-    this.emitter.on('removeTestItem', (data) => {
+    this.$emitter.on('removeTestItem', (data) => {
       //const TARGET_INDEX = this.component.findIndex(item => item.index === data)
 
       this.component = this.component.filter(item => item.index !== data)
@@ -49,7 +49,7 @@ export default {
     });
   },
   unmounted() {
-    this.emitter.off('addNewTestItem')
+    this.$emitter.off('addNewTestItem')
   },
   methods: {
     addNewTestItem(data) {
@@ -70,7 +70,7 @@ export default {
     const currentComponent = ref(null)
     const boxClass = ref(null)
     const instance = getCurrentInstance()
-    const eventBus = instance.appContext.config.globalProperties.emitter
+    const eventBus = instance.appContext.config.globalProperties.$emitter
     const setComponent = (component) => {
       if(component !== null){
         console.log('got open setting page event', component[0])
@@ -82,6 +82,13 @@ export default {
           'set': settingPage
         }[component[0]])
       }
+      boxClass.value = markRaw({
+        'home': 'HomePage',
+        'log': 'LogPage',
+        'test': 'TestPage',
+        'add': 'addNewTestProcessPage',
+        'set': 'settingPage'
+      }[component[0]])
     }
 
     onMounted(() => {
@@ -101,7 +108,6 @@ export default {
 </script>
 
 <style>
-
 .add-new-test-process-page {
   width: 170vh;
   height: 95vh;
