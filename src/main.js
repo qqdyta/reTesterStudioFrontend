@@ -63,5 +63,53 @@ let testItemProcess = []
 app.config.globalProperties.$testProcess = testItemProcess
 
 
+
+class InTesting {
+
+    constructor() {
+        this.testingData = {}
+        emitter.on('testing', (data) => {
+            const TYPE = data.type
+            if(TYPE == 'init'){
+                this.initTestingData(data.data)
+            }else if(TYPE == 'get'){
+                emitter.emit('testingData', this.getData())
+            }
+        })
+    }
+
+    getData(){
+        return this.testingData
+    }
+
+    setResult(result){
+        const INDEX = result['index']
+        this.testingData[INDEX]['result'] = result
+    }
+
+    init(id){
+        fetch('http://127.0.0.1:8000/' + 'testPlan/', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify({typed: 'getSingleTestPlan', 'id': id}),
+        }).then(response => response.json())
+            .then(data => {
+                this.testingData = data.data
+                console.log('got the server data: ', data.data)
+            })
+    }
+}
+
+const IN_TESTING = new InTesting()
+app.config.globalProperties.$inTesting = IN_TESTING
+
+
 app.mount('#app')
 require('./data')
