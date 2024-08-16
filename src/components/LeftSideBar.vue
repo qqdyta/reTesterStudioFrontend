@@ -15,23 +15,23 @@ export default {
   },
   methods: {
     openMainPage() {
-      this.emitter.emit('settingRightBox', ['home'])
+      this.$emitter.emit('settingRightBox', ['home'])
       console.log('openMainPage')
     },
     openTestPage() {
-      this.emitter.emit('settingRightBox', ['test'])
+      this.$emitter.emit('settingRightBox', ['test'])
       console.log('openTestPage')
     },
     openAddPage() {
-      this.emitter.emit('settingRightBox', ['add'])
+      this.$emitter.emit('settingRightBox', ['add'])
       console.log('openAddPage')
     },
     openLOGPage() {
-      this.emitter.emit('settingRightBox', ['log'])
+      this.$emitter.emit('settingRightBox', ['log'])
       console.log('openLOGPage')
     },
     openSettingPage() {
-      this.emitter.emit('settingRightBox', ['set'])
+      this.$emitter.emit('settingRightBox', ['set'])
       console.log('openSettingPage')
     }
   }
