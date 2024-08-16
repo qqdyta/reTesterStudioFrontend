@@ -28,6 +28,25 @@ export default {
         limitMax: 10,
        }
     }
+  },
+  beforeMount() {
+    console.log('Voltage beforeMount')
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Voltage getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
+  },
+  mounted() {
+    console.log(' Voltage mounted')
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex})
+  },
+  unmounted() {
+    console.log('Voltage unmounted')
+    this.$emitter.off('getProcessData')
   }
 }
 </script>
