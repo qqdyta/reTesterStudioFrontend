@@ -10,10 +10,11 @@ export default {
       show: false,
       activeTab: 'osc',
       cards: [
-        {key: '采集', setType:'osc', item: ['oscGetWave', 'voltage', "current"]},
-        {key: '电源', setType:'psld', item: ['loadOn', 'loadOff', 'powerSupplyOn', 'powerSupplyOff']},
-        {key: '接口', setType:'spnw', item: ['serialPort', 'ethernet']},
-        {key: '其他', setType:'other', item: ['wait', 'onStart', 'onEnd']},
+        {key: '电源', setType:'osc', item: ['voltage', "current", 'loadOn', 'loadOff', 'powerSupplyOn', 'powerSupplyOff']},
+        {key: '网络', setType:'psld', item: ['ethernet']},
+        {key: '信号', setType:'spnw', item: ['serialPort', 'oscGetWave']},
+        {key: '串口', setType:'other', item: ['wait', 'onStart', 'onEnd']},
+        {key: '其他', setType:'input', item: ['wait', 'scanner', 'onEnd']},
       ]
     }
   },
@@ -68,7 +69,7 @@ export default {
   height: 6vh;
 }
 .main {
-  width: 90%;
+  width: 95%;
   overflow-x: auto;
   white-space: nowrap;
   scroll-behavior: smooth; /* 平滑滚动 */
