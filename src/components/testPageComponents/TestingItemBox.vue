@@ -1,46 +1,47 @@
 <template>
-  <ul v-infinite-scroll="load" v-loading="props.onLoad" class="infinite-list" style="overflow: auto">
-    <el-row v-for="step in props.testPlan" :key="step.id" class="infinite-list-item" @click="showTestingItemDetail">
-      <el-col :span="18">{{ i }}</el-col>
+  <ul v-loading="props.onLoad" class="infinite-list" style="overflow: auto">
+    <el-row v-for="step in props.testPlan" :key="step.id" class="infinite-list-item" @click="showTestingItemDetail(step.id)">
+      <el-col :span="18">{{ step['data']['stepName'] }}</el-col>
       <el-col :span="6">成功</el-col>
     </el-row>
-
   </ul>
 </template>
 
 <script setup>
-import {ref, defineProps, watch} from 'vue'
-const count = ref(0)
-const load = () => {
-  count.value += 2
-}
+/* eslint-disable */
+import {defineProps} from 'vue'
 
 const props = defineProps({
+  testPlanId: {
+    type: Number,
+    default: 0
+  },
+  testPlanDescription: {
+    type: String,
+    default: ''
+  },
   testPlan: {
     type: Object,
     default: () => {
-      return {step:[]}
-    },
-    onLoad: {
-      type: Boolean,
-      default: true
+      return {}
     }
+  },
+  onLoad: {
+    type: Boolean,
+    default: true
+  },
+  testPlanName: {
+    type: String,
+    default: ''
   }
 })
 
-watch(() => props.testPlan, (newVal) => {
-  console.log('the new value is ', newVal)
-})
-
-watch(() => props.onLoad, (newVal) => {
-  console.log('the new value is ', newVal)
-})
-
-
-function showTestingItemDetail(){
-  console.log('show the testing item detail')
+function showTestingItemDetail(stepID){
+  console.log('show the testing item detail: ', stepID)
+  console.log('the testPlan is: ', props.testPlan)
+  console.log('the testPlanId is: ', props.testPlanId)
+  console.log('the testPlanName is: ', props.testPlanName)
 }
-
 </script>
 
 <style>

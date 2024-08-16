@@ -1,7 +1,7 @@
 <template>
   <div class="main-box">
     <div class="inner-box">
-      <testing-item-box class="testing-item-box" :test-plan="this.testPlan"></testing-item-box>
+      <testing-item-box class="testing-item-box" :test-plan="this.testPlan" :testPlanId="this.testPlanId" :test-plan-name="this.testPlanName" :test-plan-description="this.testPlanDescription" :on-load="this.testingItemBoxOnLoad"></testing-item-box>
     </div>
   </div>
 </template>
@@ -17,17 +17,24 @@ export default {
   data(){
     return {
       testPlan: {},
-      testingItemBoxOnLoad: true
+      testingItemBoxOnLoad: true,
+      testPlanId: 0,
+      testPlanName: '',
+      testPlanDescription: ''
     }
   },
-  mounted() {
-    this.$inTesting.init(2)
+  beforeMount() {
+    this.$inTesting.init(9)
     setTimeout(() => {
       const TEST_DATA = this.$inTesting.getData()
       this.testingItemBoxOnLoad = false
-      this.testPlan = TEST_DATA
-      console.log('dose updated?', this.testPlan)
-    }, 500)
+      this.testPlan = TEST_DATA[0]['testStep']
+      this.testPlanId = TEST_DATA[0]['id']
+      console.log('the testPlanID is ' + this.testPlanId)
+      this.testPlanName = TEST_DATA[0]['name']
+      this.testPlanDescription = TEST_DATA[0]['description']
+      console.log('dose updated?', this.testPlan, TEST_DATA[0])
+    }, 100)
   },
 }
 </script>
