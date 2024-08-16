@@ -31,16 +31,16 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('addNewTestItem', (data) => {
+    this.$emitter.on('addNewTestItem', (data) => {
       this.addNewTestItem(data)
     });
-    this.emitter.on('removeTestItem', (data) => {
+    this.$emitter.on('removeTestItem', (data) => {
 
       this.component = this.component.filter(item => item.index !== data)
     });
   },
   unmounted() {
-    this.emitter.off('addNewTestItem')
+    this.$emitter.off('addNewTestItem')
   },
   methods: {
 
@@ -62,7 +62,7 @@ export default {
         class: 'light',
         type: nodeType
       }
-      this.emitter.emit('addNewTestProgress', TEST_DATA)
+      this.$emitter.emit('addNewTestProgress', TEST_DATA)
       this.yPosition += 100
       this.component.push(TEST_DATA)
     },
@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .main-box {
   flex: 1;
   position: relative;
@@ -84,7 +84,7 @@ export default {
 
 .add-new-test-item-box {
   position: absolute;
-  width: 15%;
+  width: 20%;
   z-index: 1;
 }
 
