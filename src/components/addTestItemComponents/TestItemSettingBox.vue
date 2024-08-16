@@ -17,6 +17,7 @@ import powerSupplyOnSettingBox from "@/components/addTestItemComponents/testItem
 import powerSupplyOffSettingBox from "@/components/addTestItemComponents/testItemSettingCard/powerSupplyOffSettingBox.vue";
 import testStartSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testStartSettingBox.vue";
 import testFinishSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testFinishSettingBox.vue";
+import scannerSettingBox from "@/components/addTestItemComponents/testItemSettingCard/scannerSettingBox.vue";
 
 export default {
   name: "TestItemSettingBox",
@@ -35,7 +36,8 @@ export default {
     powerSupplyOnSettingBox,
     powerSupplyOffSettingBox,
     testStartSettingBox,
-    testFinishSettingBox
+    testFinishSettingBox,
+    scannerSettingBox
   },
 
   setup() {
@@ -60,7 +62,8 @@ export default {
           'serialPort': SerialTestItemSettingBox,
           'ethernet': EthernetTestItemSettingBox,
           'onStart': testStartSettingBox,
-          'onEnd': testFinishSettingBox
+          'onEnd': testFinishSettingBox,
+          'scanner': scannerSettingBox
         }[component[0]])
       }else{
         currentComponent.value = null
