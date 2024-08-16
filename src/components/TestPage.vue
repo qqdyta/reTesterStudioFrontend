@@ -1,7 +1,7 @@
 <template>
   <div class="main-box">
     <div class="inner-box">
-      <testing-item-box class="testing-item-box"></testing-item-box>
+      <testing-item-box class="testing-item-box" :test-plan="this.testPlan"></testing-item-box>
     </div>
   </div>
 </template>
@@ -13,7 +13,22 @@ export default {
   name: 'TestPage',
   components: {
     TestingItemBox
-  }
+  },
+  data(){
+    return {
+      testPlan: {},
+      testingItemBoxOnLoad: true
+    }
+  },
+  mounted() {
+    this.$inTesting.init(2)
+    setTimeout(() => {
+      const TEST_DATA = this.$inTesting.getData()
+      this.testingItemBoxOnLoad = false
+      this.testPlan = TEST_DATA
+      console.log('dose updated?', this.testPlan)
+    }, 500)
+  },
 }
 </script>
 
