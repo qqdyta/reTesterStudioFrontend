@@ -6,14 +6,14 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-
-
 const app = createApp(App)
 app.use(ElementPlus)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
+const SERVER_URL = 'http://127.0.0.1:8000/'
+app.config.globalProperties.$serverUrl = SERVER_URL
 
 // Filter out the specific warning message
 warn.__proto__.filter = (msg) => {
@@ -26,7 +26,7 @@ warn.__proto__.filter = (msg) => {
 
 const emitter = mitt();
 export default emitter
-app.config.globalProperties.emitter = emitter;
+app.config.globalProperties.$emitter = emitter;
 
 
 const testItemSettingData = reactive({
@@ -36,9 +36,6 @@ const testItemSettingData = reactive({
     valueData:{}
 })
 app.config.globalProperties.testItemSettingData = testItemSettingData
-
-
-
 
 const TEST_ITEM_DICT = {
     'voltage':  {color: 'var(--color-dmm)', title: '电压测试'},
