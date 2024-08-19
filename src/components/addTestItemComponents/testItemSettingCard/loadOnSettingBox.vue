@@ -89,20 +89,14 @@ export default {
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="负载端口">
             <el-input v-model="testItemSettingData.COM">
               <template #prepend>COM</template>
             </el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="测试类型">
-            <el-input v-model="testItemSettingData.stepType" disabled />
-          </el-form-item>
-        </el-col>
       </el-row>
-
       <el-row>
         <el-col :span="12">
           <el-form-item label="测试模式">
