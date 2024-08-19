@@ -2,7 +2,7 @@
   <ul v-loading="props.onLoad" class="infinite-list" style="overflow: auto">
     <el-row v-for="step in props.testPlan" :key="step.id" class="infinite-list-item" @click="showTestingItemDetail(step.id)">
       <el-col :span="18">{{ step['data']['stepName'] }}</el-col>
-      <el-col :span="6">成功</el-col>
+      <el-col :span="6" style="cursor: pointer">成功</el-col>
     </el-row>
   </ul>
 </template>
@@ -10,6 +10,7 @@
 <script setup>
 /* eslint-disable */
 import {defineProps} from 'vue'
+import eventBus from "@/eventBus";
 
 const props = defineProps({
   testPlanId: {
@@ -37,10 +38,8 @@ const props = defineProps({
 })
 
 function showTestingItemDetail(stepID){
-  console.log('show the testing item detail: ', stepID)
-  console.log('the testPlan is: ', props.testPlan)
-  console.log('the testPlanId is: ', props.testPlanId)
-  console.log('the testPlanName is: ', props.testPlanName)
+  eventBus.emit('showTestingItemDetail', stepID)
+
 }
 </script>
 
