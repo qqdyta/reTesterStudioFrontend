@@ -1,18 +1,42 @@
 <template>
   <div class="main-box">
-    <div class="inner-box">
-      <testing-item-box class="testing-item-box" :test-plan="this.testPlan" :testPlanId="this.testPlanId" :test-plan-name="this.testPlanName" :test-plan-description="this.testPlanDescription" :on-load="this.testingItemBoxOnLoad"></testing-item-box>
-    </div>
+    <el-row>
+      <el-col :span="6">
+        <el-row>
+          <el-col :span="24">
+            <div class="inner-box">
+              <testing-item-box :test-plan="this.testPlan" :testPlanId="this.testPlanId" :test-plan-name="this.testPlanName" :test-plan-description="this.testPlanDescription" :on-load="this.testingItemBoxOnLoad"></testing-item-box>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-button type="primary" class="startTestButton">开 始 测 试</el-button>
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col :span="18">
+        <el-row>
+          <el-col :span="24">
+            <div class="testing-item-detail-box-box">
+              <TestingItemDetailBox class="testing-item-detail-box" :test-plan="this.testPlan"></TestingItemDetailBox>
+            </div>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import "../assets/main.css"
 import TestingItemBox from "@/components/testPageComponents/TestingItemBox.vue";
+import TestingItemDetailBox from "@/components/testPageComponents/TestingItemDetailBox.vue";
 export default {
   name: 'TestPage',
   components: {
-    TestingItemBox
+    TestingItemBox,
+    TestingItemDetailBox
   },
   data(){
     return {
@@ -51,9 +75,20 @@ export default {
   padding: 15px;
 }
 
-.testing-item-box{
-  width: 30%;
+.testing-item-detail-box{
+  color: #9b59b6;
 }
+.testing-item-detail-box-box{
+  height: 95vh;
+}
+
+.startTestButton{
+  width: 80%;
+  margin-top: 10px;
+  font-size: 20px;
+  height: 60px;
+}
+
 
 ::-webkit-scrollbar-button {
   display: none
