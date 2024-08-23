@@ -18,7 +18,7 @@ export default {
       testItemSettingData: {
         stepName: "电源开启",
         channel: 0,
-        stepType: "电源开启",
+        stepType: "powerSupplyOn",
         stepIndex: 0,
         stepDescription: "电压测试描述",
         isDC: true,
@@ -103,8 +103,8 @@ export default {
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="测试类型">
-            <el-input v-model="testItemSettingData.stepType" disabled />
+          <el-form-item label="电压">
+            <el-input-number step="0.1" v-model="testItemSettingData.Voltage" />
           </el-form-item>
         </el-col>
       </el-row>
