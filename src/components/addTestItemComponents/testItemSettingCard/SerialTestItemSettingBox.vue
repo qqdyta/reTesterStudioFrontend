@@ -1,6 +1,10 @@
 <script>
+import PageSettingButton from "@/components/addTestItemComponents/PageSettingButton.vue";
 export default {
   name: "SerialTestItemSettingBox",
+  components: {
+    PageSettingButton
+  },
   props: {
     cardIndex: {
       type: Number,
