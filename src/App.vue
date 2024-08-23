@@ -133,14 +133,13 @@ export default {
   flex: 1;
 }
 
-.left-bar-box{
-  width: 100vh;
-}
-
-
 .left-bar-box {
   width: 60px;
   height:95vh;
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
+}
+
+.right-box{
+  width: 100%;
 }
 </style>
