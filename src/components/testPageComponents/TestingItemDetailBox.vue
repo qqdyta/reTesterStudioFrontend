@@ -1,6 +1,6 @@
 <script setup>
 /* eslint-disable */
-import {ref, onMounted, onUnmounted, defineProps, getCurrentInstance, markRaw} from "vue";
+import {ref, onMounted, onUnmounted, defineProps, getCurrentInstance, markRaw, watch} from "vue";
 import TestingItemCurrentDetailCard
   from "@/components/testPageComponents/testingItemDetailCard/TestingItemCurrentDetailCard.vue";
 import TestingItemIperfDetailCard
@@ -39,6 +39,7 @@ const currentIndex = ref(0)
 const currentComponent = ref(null)
 const boxClass = ref(null)
 const instance = getCurrentInstance()
+const TEST_PLAN_DETAIL = ref(null)
 
 const setComponent = (component) => {
   console.log('the component is ', component)
@@ -63,7 +64,16 @@ const setComponent = (component) => {
     'onEnd': {color: 'var(--color-end)', title: '测试结束'},
     'scanner': {color: 'var(--color-scanner)', title: '扫码输入', component: TestingItemScannerDetailCard},
   }
+
+  currentComponent.value =markRaw( TYPE_DIC[component.setType]['component'])
+
+  TEST_PLAN_DETAIL.value = markRaw(props.testPlan[component.index])
 }
+
+watch(currentIndex, (newIndex) => {
+  console.log('the new index is ', newIndex)
+  setComponent(props.testPlan[newIndex])
+})
 
 onMounted(() => {
   console.log('testingItemDetailBox mounted')
@@ -86,6 +96,7 @@ onUnmounted(() => {
   <div>testingItemDetailBox</div>
   <el-row>
     <el-col :span="24">
+      <component :is="currentComponent" :test-plan-detail="TEST_PLAN_DETAIL"></component>
     </el-col>
   </el-row>
 </template>
