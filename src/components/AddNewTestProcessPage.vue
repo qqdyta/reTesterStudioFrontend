@@ -76,6 +76,7 @@ export default {
 <style scoped>
 .main-box {
   flex: 1;
+  width: 100%;
   position: relative;
   flex-direction: column;
   justify-content: space-between;
@@ -95,8 +96,9 @@ export default {
 
 .test-item-setting-box{
   position: absolute;
-  right: 10%;
-  width: 15%;
+  right: 10px;
+  top:10px;
+  width: 25%;
   z-index: 1;
 }
 
