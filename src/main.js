@@ -44,7 +44,7 @@ const TEST_ITEM_DICT = {
     'oscilloscope':  {color: 'var(--color-oscilloscope)', title: '示波器设置'},
     'oscGetWave':  {color: 'var(--color-oscilloscope)', title: '测试波形'},
     'oscGetDelta':  {color: 'var(--color-oscilloscope)', title: '测试纹波'},
-    'ethernet':  {color: 'var(--color-ethernet)', title: '以太网'},
+    'ethernet':  {color: 'var(--color-ethernet)', title: '以太网测速'},
     'serialPort':  {color: 'var(--color-serial)', title: '串口'},
     'wait': {color: 'var(--color-wait)', title: '等待'},
     'powerSupplySet':{color: 'var(--color-power-supply)', title: '电源设置'},
@@ -56,6 +56,7 @@ const TEST_ITEM_DICT = {
     'onStart': {color: 'var(--color-start)', title: '测试开始'},
     'onEnd': {color: 'var(--color-end)', title: '测试结束'},
     'scanner': {color: 'var(--color-scanner)', title: '扫码输入'},
+    'SSH': {color: 'var(--color-ethernet)', title: 'SSH'},
 }
 app.config.globalProperties.$testItemDict = TEST_ITEM_DICT
 app.provide('$testItemDict', TEST_ITEM_DICT);
