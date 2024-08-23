@@ -18,6 +18,7 @@ import powerSupplyOffSettingBox from "@/components/addTestItemComponents/testIte
 import testStartSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testStartSettingBox.vue";
 import testFinishSettingBox from "@/components/addTestItemComponents/testItemSettingCard/testFinishSettingBox.vue";
 import scannerSettingBox from "@/components/addTestItemComponents/testItemSettingCard/scannerSettingBox.vue";
+import SSHTestItemSettingBox from "@/components/addTestItemComponents/testItemSettingCard/SSHTestItemSettingBox.vue";
 
 export default {
   name: "TestItemSettingBox",
@@ -37,7 +38,8 @@ export default {
     powerSupplyOffSettingBox,
     testStartSettingBox,
     testFinishSettingBox,
-    scannerSettingBox
+    scannerSettingBox,
+    SSHTestItemSettingBox
   },
 
   setup() {
@@ -63,7 +65,8 @@ export default {
           'ethernet': EthernetTestItemSettingBox,
           'onStart': testStartSettingBox,
           'onEnd': testFinishSettingBox,
-          'scanner': scannerSettingBox
+          'scanner': scannerSettingBox,
+          'SSH': SSHTestItemSettingBox
         }[component[0]])
       }else{
         currentComponent.value = null
@@ -117,14 +120,13 @@ export default {
 
 <style scoped>
 .box {
-  margin: 15px;
-  width: 40vh;
+  padding-top: 10px;
+  width: 90%;
   height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-
 }
 
 .submit-button {
