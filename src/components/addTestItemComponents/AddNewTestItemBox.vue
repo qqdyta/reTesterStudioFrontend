@@ -11,10 +11,10 @@ export default {
       activeTab: 'osc',
       cards: [
         {key: '电源', setType:'osc', item: ['voltage', "current", 'loadOn', 'loadOff', 'powerSupplyOn', 'powerSupplyOff']},
-        {key: '网络', setType:'psld', item: ['ethernet']},
-        {key: '信号', setType:'spnw', item: ['serialPort', 'oscGetWave']},
-        {key: '串口', setType:'other', item: ['wait', 'onStart', 'onEnd']},
-        {key: '其他', setType:'input', item: ['wait', 'scanner', 'onEnd']},
+        {key: '网络', setType:'psld', item: ['ethernet', 'SSH']},
+        {key: '信号', setType:'spnw', item: ['oscGetWave']},
+        {key: '串口', setType:'other', item: ['serialPort']},
+        {key: '其他', setType:'input', item: ['wait', 'scanner', 'onStart','onEnd']},
       ]
     }
   },
