@@ -10,6 +10,7 @@
 
 <script>
 /* eslint-disable */
+import { ElNotification } from 'element-plus'
 import "./assets/main.css"
 import HeaderBar from "@/components/HeaderBar.vue"
 import LeftSideBar from "@/components/LeftSideBar.vue"
@@ -34,7 +35,7 @@ export default {
   data(){
     return {
       component: [],
-      counter: 0,
+      counter: 0
     }
   },
   mounted() {
@@ -53,13 +54,16 @@ export default {
   },
   methods: {
     addNewTestItem(data) {
-      const TEST_DATA = {
-        id: this.counter++,
-        setType: data,
-        index: this.counter
+      if(this.counter == 0 && data !== 'onStart'){
+      }else{
+        const TEST_DATA = {
+          id: this.counter++,
+          setType: data,
+          index: this.counter
+        }
+        this.component.push(TEST_DATA)
+        //console.log('the components is ', this.component)
       }
-      this.component.push(TEST_DATA)
-      //console.log('the components is ', this.component)
     },
     openSettingPage(component) {
       console.log('the component is ', component)
