@@ -77,26 +77,54 @@ class TestProcess {
     }
 
     async submitData(){
-        const URL = 'http://127.0.0.1:8000/' + 'processAdd/'
-        const response = await fetch(URL, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *client
-            body: JSON.stringify(this.testData), // body data type must match "Content-Type" header
-        });
-        console.log('the response is: ', response)
-        const responseData = await response.json()
-        console.log('the response data is: ', responseData)
-        const RESULT = responseData['result']
-        RESULT ? notify_success('新增测试方案成功') : notify_warning('新增测试方案失败')
-        return response; //
+
+        let fileData = []
+        this.testData.forEach(item=>{
+            if(Object.keys(item.data).length < 2 && item.setType !== 'onEnd'){
+                fileData.push(item)
+            }
+        })
+
+        const ALL_DATA_LENGTH = this.testData.length
+        const FILE_DATA_LENGTH = fileData.length
+        if(fileData.length > 0){
+            ElNotification({
+                type: 'warning',
+                title: '有卡片没有填写信息',
+                message: `有${FILE_DATA_LENGTH}个卡片没有填写信息`
+            })
+        }else{
+
+            const LAST_ITEM_TYPE = this.testData[ALL_DATA_LENGTH - 1].setType
+            if(LAST_ITEM_TYPE !== 'onEnd'){
+                ElNotification({
+                    type: 'warning',
+                    title: '测试流程没有结束',
+                    message: `流程的最后必须以 结束 卡片结束`
+                })
+            }else{
+                const URL = 'http://127.0.0.1:8000/' + 'processAdd/'
+                const response = await fetch(URL, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, *cors, same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrerPolicy: 'no-referrer', // no-referrer, *client
+                    body: JSON.stringify(this.testData), // body data type must match "Content-Type" header
+                });
+                console.log('the response is: ', response)
+                const responseData = await response.json()
+                console.log('the response data is: ', responseData)
+                const RESULT = responseData['result']
+                RESULT ? notify_success('新增测试方案成功') : notify_warning('新增测试方案失败')
+                return response; //
+            }
+        }
     }
 
     cleanUpData(){
