@@ -13,7 +13,15 @@ export default {
         value: 1
       }
     }
-  }
+  },
+  watch: {
+    testItemSettingData: {
+      handler(val) {
+        console.log('current test item setting data is ', val)
+      },
+      deep: true
+    }
+  },
 }
 </script>
 <template>
