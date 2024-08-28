@@ -30,7 +30,15 @@ export default {
         COM: 0
       }
     }
-  }
+  },
+  watch: {
+    testItemSettingData: {
+      handler(val) {
+        console.log('current test item setting data is ', val)
+      },
+      deep: true
+    }
+  },
 }
 </script>
 
