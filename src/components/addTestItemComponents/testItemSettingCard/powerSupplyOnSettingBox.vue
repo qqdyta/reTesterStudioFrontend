@@ -21,7 +21,7 @@ export default {
         stepType: "powerSupplyOn",
         stepIndex: 0,
         stepDescription: "电压测试描述",
-        isDC: true,
+        isCurrentLimit: true,
         range: 0,  //         0: 0.1V | 1: 1V  | 2: 10V  | 3: 100V
         accuracy: 0.1,  //    0: 3.00E-5 |  1: 2.00E-5 | 2: 1.5E-6
         limitMin: 0,
@@ -48,7 +48,12 @@ export default {
   unmounted() {
     console.log('Start unmounted')
     this.$emitter.off('getProcessData')
-  }
+  },
+  watch: {
+    testItemSettingData: {
+      deep: true
+    }
+  },
 }
 </script>
 
@@ -99,7 +104,7 @@ export default {
       <el-row>
         <el-col :span="12">
           <el-form-item label="电流限制">
-            <el-switch v-model="testItemSettingData.isDC" active-text="无" inactive-text="有" />
+            <el-switch v-model="testItemSettingData.isCurrentLimit" active-text="无" inactive-text="有" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
