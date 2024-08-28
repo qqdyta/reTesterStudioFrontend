@@ -36,7 +36,15 @@ export default {
   unmounted() {
     console.log('Start unmounted')
     this.$emitter.off('getProcessData')
-  }
+  },
+  watch: {
+    testItemSettingData: {
+      handler(val) {
+        console.log('current test item setting data is ', val)
+      },
+      deep: true
+    }
+  },
 }
 </script>
 
