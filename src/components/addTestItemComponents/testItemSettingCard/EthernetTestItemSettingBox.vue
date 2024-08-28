@@ -11,6 +11,11 @@ export default {
       default: 0
     }
   },
+  watch: {
+    testItemSettingData: {
+      deep: true
+    }
+  },
   data() {
     return {
       testItemSettingData: {
