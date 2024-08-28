@@ -47,6 +47,14 @@ export default {
   unmounted() {
     console.log('Voltage unmounted')
     this.$emitter.off('getProcessData')
+  },
+  watch: {
+    testItemSettingData: {
+      handler(val) {
+        console.log('current test item setting data is ', val)
+      },
+      deep: true
+    }
   }
 }
 </script>
@@ -87,14 +95,9 @@ export default {
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="12">
+      <el-col :span="24">
         <el-form-item label="类型">
           <el-switch v-model="testItemSettingData.isDC" active-text="直流" inactive-text="交流" />
-        </el-form-item>
-      </el-col>
-      <el-col :span="12">
-        <el-form-item label="测试类型">
-          <el-input v-model="testItemSettingData.stepType" disabled />
         </el-form-item>
       </el-col>
     </el-row>
