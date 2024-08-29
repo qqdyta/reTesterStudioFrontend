@@ -25,7 +25,6 @@ export default {
         isDC: true,
         range: 0,  //         0: 0.1V | 1: 1V  | 2: 10V  | 3: 100V
         accuracy: 0.1,  //    0: 3.00E-5 |  1: 2.00E-5 | 2: 1.5E-6
-        limitMin: 0,
         limitMax: 10,
         Voltage: 0,
         CurrentLimit: 0,
@@ -65,12 +64,15 @@ export default {
   <div class="main">
     <el-form :model="testItemSettingData" label-width="auto" style="max-width: 600px">
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="测试名称">
             <el-input v-model="testItemSettingData.stepName" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="&nbsp;&nbsp;&nbsp;负载通道">
             <el-select v-model="testItemSettingData.channel">
               <el-option label="1" value="1"></el-option>
@@ -106,7 +108,7 @@ export default {
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="测试模式">
             <el-select v-model="testItemSettingData.Mode"  controls-position="right">
               <el-option label="CC" value="CC"></el-option>
@@ -116,8 +118,10 @@ export default {
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="参数上限">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="电流上限">
             <el-input-number v-model="testItemSettingData.limitMax"  controls-position="right" :min="0" :max="30" :step="0.1" />
           </el-form-item>
         </el-col>
