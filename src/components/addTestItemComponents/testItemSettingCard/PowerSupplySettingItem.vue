@@ -1,6 +1,35 @@
 <script>
+import PageSettingButton from "@/components/addTestItemComponents/PageSettingButton.vue";
+
 export default {
   name: "PowerSupplySettingItem",
+  components: {
+    PageSettingButton
+  },
+  props: {
+    cardIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  emits: ['click'],
+  mounted() {
+    console.log('Start beforeMount')
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Start getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
+    console.log(' Start mounted')
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
+  },
+  unmounted() {
+    console.log('Start unmounted')
+    this.$emitter.off('getProcessData')
+  },
   data() {
     return {
       testItemSettingData: {
@@ -81,14 +110,8 @@ export default {
       </el-row>
       <div>
         <el-row>
-          <el-col :span="12">
-
-          </el-col>
-          <el-col :span="12">
-            <div>
-              <el-button type="primary" >保存</el-button>
-              <el-button>取消</el-button>
-            </div>
+          <el-col :span="24">
+            <page-setting-button :cardIndex="this.cardIndex" :process-data="this.testItemSettingData"></page-setting-button>
           </el-col>
         </el-row>
       </div>
