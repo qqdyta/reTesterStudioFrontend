@@ -47,7 +47,6 @@ class TestProcess {
                     }
                 })
             }else if(TYPE == 'load'){
-
                 this.processID = data.processID
                 this.testData = data.testStep
                 this.edges = data.testEdge
