@@ -34,29 +34,36 @@ export default {
       counter: 0,
     }
   },
-  mounted() {
-    fetch(this.$serverUrl + 'testPlan/', {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify({typed: 'getTestPlanList'}), // body data type must match "Content-Type" header
-    }).then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          this.tableData = data.data
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+  methods: {
+    getData(){
+      fetch(this.$serverUrl + 'testPlan/', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify({typed: 'getTestPlanList'}), // body data type must match "Content-Type" header
+      }).then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            this.tableData = data.data
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+    }
   },
-
+  mounted() {
+    this.getData()
+    this.$emitter.on('updateAllProcessData', () => {
+      this.getData()
+    })
+  }
 }
 </script>
 
