@@ -16,6 +16,7 @@ class TestProcess {
     constructor() {
         this.testData = []
         this.edges = []
+        this.processID = -1
         emitter.on('updateProcessData', (data) => {
             console.log('updateProcessData: ', data)
             console.log('the this.testData is : ', this.testData)
@@ -27,14 +28,13 @@ class TestProcess {
                 this.updateProcess(data)
             }else if( TYPE == 'add' ){
                 this.addProcess(data)
-            }else if(TYPE == 'edge'){
-                this.updateEdge()
+            }else if(TYPE == 'edges'){
+                this.updateEdge(data.edges)
             }else if(TYPE == 'submit'){
                 this.submitData().then((data) => {
                     console.log('the submit data is: ', data)
                 })
             }else if(TYPE == 'get'){
-                console.log('is a get', data.CardIndex)
                 const INDEX = data.CardIndex
                 this.testData.forEach((item) => {
                     if(item['index'] == INDEX){
@@ -46,14 +46,30 @@ class TestProcess {
                         emitter.emit('getProcessData', {cardIndex: INDEX, data: item})
                     }
                 })
+            }else if(TYPE == 'load'){
+
+                this.processID = data.processID
+                this.testData = data.testStep
+                this.edges = data.testEdge
+                console.log('load data is: ', data)
+                console.log('load data is: ', this.testData)
+                console.log('load data is: ', this.edges)
+            }else if(TYPE == 'init'){
+                this.testData = []
+                this.processID = -1
+                this.edges = []
             }
         })
     }
-
     addProcess(data){
         const DATA = data.data
+        const EDGE = data.edges
         this.testData.push(DATA)
-        console.log('the test data is: ', this.testData)
+        if(EDGE !== null){
+            this.edges.push(EDGE)
+        }
+        console.log('addProcess： this.testData: ', this.testData)
+        console.log('addProcess： this.edges: ', this.edges)
     }
 
     deleteProcess(data){
@@ -65,7 +81,9 @@ class TestProcess {
                 this.testData.splice(INDEX, 1)
             }
         })
-        console.log('the test data is: ', this.testData)
+        this.edges = this.edges.filter(item => (item.source).toString() !== (INDEX - 1).toString() && item.target !== (INDEX - 1).toString())
+        console.log('deleteProcess： this.testData: ', this.testData)
+        console.log('deleteProcess： this.edges: ', this.edges)
     }
 
     updateProcess(data){
@@ -78,8 +96,10 @@ class TestProcess {
         console.log('the test data is: ', this.testData)
     }
 
-    updateEdge(){
-
+    updateEdge(edge){
+        console.log('updateEdge： this.testData: ', this.testData)
+        console.log('updateEdge： this.edges: ', this.edges)
+        this.edges.push(edge)
     }
 
     async submitData(){
@@ -122,20 +142,17 @@ class TestProcess {
                     },
                     redirect: 'follow', // manual, *follow, error
                     referrerPolicy: 'no-referrer', // no-referrer, *client
-                    body: JSON.stringify(this.testData), // body data type must match "Content-Type" header
+                    body: JSON.stringify({testData: this.testData, edges: this.edges, processID: this.processID}), // body data type must match "Content-Type" header
                 });
                 console.log('the response is: ', response)
                 const responseData = await response.json()
                 console.log('the response data is: ', responseData)
                 const RESULT = responseData['result']
                 RESULT ? notify_success('新增测试方案成功') : notify_warning('新增测试方案失败')
+                this.processID = -1
                 return response; //
             }
         }
-    }
-
-    cleanUpData(){
-        this.testData = []
     }
 }
 
