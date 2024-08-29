@@ -39,6 +39,7 @@ export default {
 
       this.component = this.component.filter(item => item.index !== data)
     });
+
   },
   unmounted() {
     this.$emitter.off('addNewTestItem')
