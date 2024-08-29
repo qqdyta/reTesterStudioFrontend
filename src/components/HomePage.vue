@@ -9,6 +9,25 @@
     </el-col>
     <el-col :span="2"></el-col>
   </el-row>
+  <br>
+  <br>
+  <br>
+  <el-row>
+    <el-col :span="2"></el-col>
+    <el-col :span="20">
+      <el-card style="max-width: 800px">
+        <template #header>
+          <div class="card-header">
+            <span>临时开发日志</span>
+          </div>
+        </template>
+        前端代码库：<el-text tag="ins">https://github.com/qqdyta/reTesterStudioFrontend.git</el-text><br>
+        服务器代码库： <el-text tag="ins">https://gitee.com/seeed-te/file-server.git</el-text> <el-text tag="b">retest&nbsp;&nbsp;</el-text>分支<br><br>
+        目前能用的页面就是<el-text tag="b">主页</el-text>和<el-text tag="b">新增</el-text>两个页面，其他的都还在制作中
+      </el-card>
+    </el-col>
+    <el-col :span="2"></el-col>
+  </el-row>
 </div>
 
 
