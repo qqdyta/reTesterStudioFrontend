@@ -131,7 +131,6 @@ export default {
   box-shadow: inset 10px 10px 20px 10px #ffffff, -2px -2px 1px 1px #ffffff, 4px 4px 6px 4px #d9d9d9;
 }
 
-
 .downer {
   display: flex;
   flex: 1;
