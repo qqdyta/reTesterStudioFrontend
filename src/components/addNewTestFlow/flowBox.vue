@@ -11,7 +11,6 @@ import emitter from "@/main";
 const { onInit, onNodeDragStop, onConnect, addEdges, onNodeClick, addNodes, removeNodes, findNode, getEdges } = useVueFlow()
 
 const dark = ref(false)
-
 const nodeTypes = {
   start: markRaw(StartNode),
   finish: markRaw(FinshNode),
