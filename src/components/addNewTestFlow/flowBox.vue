@@ -31,33 +31,46 @@ const initialEdges = ref([])
 onMounted(()=> {
   emitter.on('addNewTestProgress', (data) => {
     initialNodes.value = [...initialNodes.value, data]
-    console.log('the data is' , data)
     last_add_node_id = data.id
     addNodes(data)
+    let edge = null
     if(data.id > 0){
       /*let source_node_id = last_add_node_id === -1 ? 0 : last_add_node_id - 1*/
-      initialEdges.value.push({
+      edge = {
         id: ( data.id - 1 ) + '_2_'+data.id,
         source: (data.id - 1).toString(),
         target: data.id.toString()
-      })
+      }
+      initialEdges.value.push(edge)
     }
-    emitter.emit('updateProcessData', {type: 'add', data: data})
-    console.log('the edged is ', initialEdges.value)
+    emitter.emit('updateProcessData', {type: 'add', data: data, edges:edge })
   })
 
   emitter.on('removeTestItem', (data) => {
     initialNodes.value.forEach((item, index) => {
-
       if(item.index === data){
         //initialNodes.value = initialNodes.value.filter(item => item.index !== data)
         const SHOULD_DELETE_NODE = findNode((item.id).toString())
         removeNodes(SHOULD_DELETE_NODE)
       }
     })
-    console.log('the data is ', data)
 
     initialEdges.value = initialEdges.value.filter(item => (item.source).toString() !== (data - 1).toString() && item.target !== (data - 1).toString())
+  })
+
+  emitter.on('loadTestStep', (data) => {
+    console.log('the data is ', data)
+    initialNodes.value = []
+    initialEdges.value = []
+    emitter.emit('updateProcessData', {type: 'load', processID: data.id, testStep: data.testStep, testEdge: data.edges})
+    for (let i = 0; i < data.testStep.length; i++) {
+      initialNodes.value = [...initialNodes.value,  data.testStep[i]]
+      last_add_node_id =  data.testStep[i].id
+      addNodes(data.testStep[i])
+    }
+    for (let i=0; i < data.edges.length; i++){
+      initialEdges.value.push(data.edges[i])
+    }
   })
 })
 
@@ -77,18 +90,22 @@ const steps = defineProps({
 const nodes = ref(steps.progress)
 
 onNodeClick((node) => {
-  console.log('the edge is ', initialEdges.value)
+
   openSettings({'setType': node.node.setType,'index': node.node.index})
 })
 
 onConnect((connection) => {
-  console.log('the connection is ', connection)
+  console.log('add New Edge', connection)
   initialEdges.value.push({
     id: connection.source + '_2_' + connection.target,
     source: connection.source,
     target: connection.target
   })
-  emitter.emit('updateProcessData', {type: 'edges', data: initialEdges.value})
+  emitter.emit('updateProcessData', {type: 'edges', edges:{
+      id: connection.source + '_2_' + connection.target,
+      source: connection.source,
+      target: connection.target
+    }})
 })
 
 </script>
