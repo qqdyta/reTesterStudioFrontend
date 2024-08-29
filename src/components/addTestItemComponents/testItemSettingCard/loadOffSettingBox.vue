@@ -49,7 +49,6 @@ export default {
         this.testItemSettingData = data.data.data
       }
     })
-
     this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
   },
   unmounted() {
