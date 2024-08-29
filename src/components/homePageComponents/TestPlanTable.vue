@@ -1,8 +1,10 @@
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, getCurrentInstance } from 'vue'
 import {computed, onMounted, ref} from 'vue'
 const serverUrl = 'http://127.0.0.1:8000/'
+import { ElNotification } from 'element-plus'
 
+const { proxy } = getCurrentInstance()
 const props = defineProps({
   tableData: {
     type: Array,
@@ -51,9 +53,20 @@ const handleDelete = (index, row) => {
         const RESULT = data.result
         console.log('Success:', RESULT);
         if(RESULT){
-          this.$emitter.emit('sender', {type: 'success', title:'删除成功',  message: '已经成功删除' + row.name + '测试方案'})
+          ElNotification({
+            title: '删除成功',
+            message: '测试记录已经被删除',
+            type: 'success',
+          })
+          setTimeout(()=>{
+            proxy.$emitter.emit('updateAllProcessData');
+          }, 1000)
         }else{
-          this.$emitter.emit('sender', {type: 'warning', title:'删除失败',  message: '未能删除' + row.name + '测试方案'})
+          ElNotification({
+            title: '删除失败',
+            message: '服务器错误，请联系开发者',
+            type: 'error',
+          })
         }
       })
       .catch((error) => {
