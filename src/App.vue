@@ -78,6 +78,7 @@ export default {
     const setComponent = (component) => {
       if(component !== null){
         console.log('got open setting page event', component[0])
+        console.log('the component length is ', component.length)
         currentComponent.value = markRaw({
           'home': HomePage,
           'log': LogPage,
