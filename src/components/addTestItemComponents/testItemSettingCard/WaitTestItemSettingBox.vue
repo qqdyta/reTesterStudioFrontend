@@ -16,11 +16,9 @@ export default {
   data() {
     return {
       testItemSettingData: {
-        stepName: "",
-        stepDescription: "",
-        mode: "",
-        value: "",
-        COM: ""
+        stepName: "等待",
+        stepDescription: "延时等待",
+        value: 0,
       }
     }
   },
@@ -61,7 +59,7 @@ export default {
   <div class="main">
     <el-form :model="testItemSettingData" label-width="auto" style="max-width: 600px">
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="测试名称">
             <el-input v-model="testItemSettingData.stepName" />
           </el-form-item>
