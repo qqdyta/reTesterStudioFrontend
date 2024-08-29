@@ -36,6 +36,23 @@ export default {
         limitMax: 10,
       }
     }
+  },
+  mounted() {
+    console.log('Start beforeMount')
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Start getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
+    console.log(' Start mounted')
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
+  },
+  unmounted() {
+    console.log('Start unmounted')
+    this.$emitter.off('getProcessData')
   }
 }
 </script>
@@ -44,12 +61,22 @@ export default {
   <div class="main">
     <el-form :model="testItemSettingData" label-width="auto" style="max-width: 600px">
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="测试名称">
             <el-input v-model="testItemSettingData.stepName" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+      </el-row>
+
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="测试描述">
+            <el-input v-model="testItemSettingData.stepDescription" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="&nbsp;&nbsp;&nbsp;测试通道">
             <el-select v-model="testItemSettingData.channel">
               <el-option label="1" value="1"></el-option>
@@ -70,25 +97,13 @@ export default {
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-form-item label="测试描述">
-            <el-input v-model="testItemSettingData.stepDescription" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="类型">
+          <el-form-item label="电流类型">
             <el-switch v-model="testItemSettingData.isDC" active-text="直流" inactive-text="交流" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="测试类型">
-            <el-input v-model="testItemSettingData.stepType" disabled />
-          </el-form-item>
-        </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="量程">
             <el-select v-model="testItemSettingData.range" placeholder="请选择">
               <el-option label="0.1V" value="0"></el-option>
@@ -98,7 +113,9 @@ export default {
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="精度">
             <el-select v-model="testItemSettingData.accuracy" placeholder="请选择">
               <el-option label="3.00E-5" value="0"></el-option>
@@ -109,13 +126,15 @@ export default {
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="最小值">
+        <el-col :span="24">
+          <el-form-item label="合格下限">
             <el-input-number v-model="testItemSettingData.limitMin" controls-position="right" :min="0" :max="100" :step="0.1" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="最大值">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="合格上限">
             <el-input-number v-model="testItemSettingData.limitMax" controls-position="right" :min="0" :max="100" :step="0.1" />
           </el-form-item>
         </el-col>
