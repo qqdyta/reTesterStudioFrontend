@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       testItemSettingData: {
+        id: 0,
         stepName: "电源开启",
         channel: 0,
         stepType: "powerSupplyOn",
@@ -43,7 +44,7 @@ export default {
       }
     })
     console.log(' Start mounted')
-    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex})
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
   },
   unmounted() {
     console.log('Start unmounted')
@@ -61,12 +62,21 @@ export default {
   <div class="main">
     <el-form :model="testItemSettingData" label-width="auto" style="max-width: 600px">
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="测试名称">
             <el-input v-model="testItemSettingData.stepName" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="测试描述">
+            <el-input v-model="testItemSettingData.stepDescription" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="&nbsp;&nbsp;&nbsp;电源通道">
             <el-select v-model="testItemSettingData.channel">
               <el-option label="1" value="1"></el-option>
@@ -87,13 +97,6 @@ export default {
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-form-item label="测试描述">
-            <el-input v-model="testItemSettingData.stepDescription" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
           <el-form-item label="测试端口">
             <el-input v-model="testItemSettingData.COM">
               <template #prepend>COM</template>
@@ -102,24 +105,28 @@ export default {
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="电流限制">
             <el-switch v-model="testItemSettingData.isCurrentLimit" active-text="无" inactive-text="有" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="电压">
             <el-input-number step="0.1" v-model="testItemSettingData.Voltage" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="电流下限">
             <el-input-number v-model="testItemSettingData.limitMin" :disabled="testItemSettingData.isDC" controls-position="right" :min="0" :max="30" :step="0.1" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="电流上限">
             <el-input-number v-model="testItemSettingData.limitMax" :disabled="testItemSettingData.isDC" controls-position="right" :min="0" :max="30" :step="0.1" />
           </el-form-item>
