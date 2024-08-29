@@ -43,7 +43,7 @@ export default {
       }
     })
     console.log(' Start mounted')
-    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex})
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
   },
   unmounted() {
     console.log('Start unmounted')
