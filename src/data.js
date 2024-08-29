@@ -11,6 +11,7 @@ import { ElNotification } from 'element-plus'
 
 
 class TestProcess {
+
     constructor() {
         this.testData = []
         this.edges = []
@@ -36,7 +37,11 @@ class TestProcess {
                 const INDEX = data.CardIndex
                 this.testData.forEach((item) => {
                     if(item['index'] == INDEX){
-                        console.log('got the index')
+                        Object.keys(data.currentTestData).forEach((key) => {
+                            if(item.data[key] == undefined){
+                                item.data[key] = data.currentTestData[key]
+                            }
+                        })
                         emitter.emit('getProcessData', {cardIndex: INDEX, data: item})
                     }
                 })
