@@ -32,6 +32,23 @@ export default {
       }
     }
   },
+  mounted() {
+    console.log('Start beforeMount')
+    this.$emitter.on('getProcessData', (data) => {
+      console.log('Start getProcessData is ', data, this.cardIndex, data.cardIndex, this.cardIndex === data.index)
+      const INDEX = data.cardIndex
+      if(this.cardIndex === INDEX){
+        console.log('the data.data.data is ', data.data.data)
+        this.testItemSettingData = data.data.data
+      }
+    })
+    console.log(' Start mounted')
+    this.$emitter.emit('updateProcessData', {type: 'get', CardIndex: this.cardIndex, currentTestData: this.testItemSettingData})
+  },
+  unmounted() {
+    console.log('Start unmounted')
+    this.$emitter.off('getProcessData')
+  },
   watch: {
     testItemSettingData: {
       handler(val) {
