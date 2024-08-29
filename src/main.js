@@ -2,6 +2,7 @@ import { createApp, warn } from 'vue'
 import App from './App.vue'
 import mitt from 'mitt';
 import { reactive } from "vue";
+import { RAW_SERVER_URL } from "@/config";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -12,7 +13,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
-const SERVER_URL = 'http://127.0.0.1:8000/'
+const SERVER_URL = RAW_SERVER_URL
 app.config.globalProperties.$serverUrl = SERVER_URL
 
 // Filter out the specific warning message
@@ -90,7 +91,7 @@ class InTesting {
     }
 
     init(id){
-        fetch('http://127.0.0.1:8000/' + 'testPlan/', {
+        fetch(SERVER_URL + 'testPlan/', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',

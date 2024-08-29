@@ -88,7 +88,7 @@ export default {
       FORM_DATA.append('stepIndex', this.testItemSettingData.stepIndex);
       FORM_DATA.append('cardIndex', this.cardIndex);
       FORM_DATA.append('setType', 'tempScirptFile')
-      fetch('http://127.0.0.1:8000/' + 'uploadFile/', {
+      fetch(this.$serverUrl + 'uploadFile/', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',

@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, getCurrentInstance } from 'vue'
 import {computed, onMounted, ref} from 'vue'
-const serverUrl = 'http://127.0.0.1:8000/'
 import { ElNotification } from 'element-plus'
 
 const { proxy } = getCurrentInstance()
@@ -36,7 +35,7 @@ const handleEdit = (index, row) => {
 }
 
 const handleDelete = (index, row) => {
-  fetch(serverUrl + 'testPlan/', {
+  fetch(proxy.$serverUrl + 'testPlan/', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -75,7 +74,7 @@ const handleDelete = (index, row) => {
 }
 
 const handleExport = (index, row) => {
-  fetch(serverUrl + 'testPlan/', {
+  fetch(proxy.$serverUrl + 'testPlan/', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

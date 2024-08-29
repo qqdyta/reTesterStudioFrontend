@@ -7,6 +7,7 @@
 * */
 
 import emitter from "@/main";
+import { RAW_SERVER_URL } from "@/config";
 import { ElNotification } from 'element-plus'
 
 
@@ -108,7 +109,8 @@ class TestProcess {
                     message: `流程的最后必须以 结束 卡片结束`
                 })
             }else{
-                const URL = 'http://127.0.0.1:8000/' + 'processAdd/'
+                const URL = RAW_SERVER_URL + 'processAdd/'
+                console.log('the URL is ', JSON.stringify(RAW_SERVER_URL))
                 const response = await fetch(URL, {
                     method: 'POST', // *GET, POST, PUT, DELETE, etc.
                     mode: 'cors', // no-cors, *cors, same-origin
