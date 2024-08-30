@@ -94,7 +94,6 @@ export default {
 .testing-item-detail-box-box{
   height: 95vh;
 }
-
 .startTestButton{
   width: 80%;
   margin-top: 10px;
