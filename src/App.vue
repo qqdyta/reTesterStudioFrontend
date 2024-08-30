@@ -76,6 +76,7 @@ export default {
     const instance = getCurrentInstance()
     const eventBus = instance.appContext.config.globalProperties.$emitter
     const setComponent = (component) => {
+      console.log('the component is ', component)
       if(component !== null){
         console.log('got open setting page event', component[0])
         console.log('the component length is ', component.length)

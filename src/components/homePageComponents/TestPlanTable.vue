@@ -2,7 +2,6 @@
 import { defineProps, getCurrentInstance } from 'vue'
 import {computed, onMounted, ref} from 'vue'
 import { ElNotification } from 'element-plus'
-
 const { proxy } = getCurrentInstance()
 const props = defineProps({
   tableData: {
@@ -26,8 +25,11 @@ const filterTableData = computed(() =>
     )
 )
 
-const goToTest = (index, row) => {
+const handleTest = (index, row) => {
   console.log(index, row)
+  proxy.$inTesting.init(row.id)
+  proxy.$emitter.emit('settingRightBox', ['test'])
+
 }
 
 const handleEdit = (index, row) => {
@@ -148,7 +150,7 @@ onMounted(() => {
         <el-input v-model="search" size="small" placeholder="Type to search" />
       </template>
       <template #default="scope">
-        <el-button size="small" type="primary" @click="goToTest(scope.$index, scope.row)">
+        <el-button size="small" type="primary" @click="handleTest(scope.$index, scope.row)">
           测试
         </el-button>
         <el-button size="small" type="success" @click="handleExport(scope.$index, scope.row)">
