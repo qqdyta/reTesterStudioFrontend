@@ -48,7 +48,7 @@ export default {
     }
   },
   beforeMount() {
-    this.$inTesting.init(9)
+    //this.$inTesting.init(9)
     setTimeout(() => {
       const TEST_DATA = this.$inTesting.getData()
       this.testingItemBoxOnLoad = false
