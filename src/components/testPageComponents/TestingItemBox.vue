@@ -39,7 +39,6 @@ const props = defineProps({
 
 function showTestingItemDetail(stepID){
   eventBus.emit('showTestingItemDetail', stepID)
-
 }
 </script>
 
