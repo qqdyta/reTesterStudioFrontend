@@ -11,7 +11,19 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-button type="primary" class="startTestButton">开 始 测 试</el-button>
+            <rl-row>
+              <el-col :span="24">
+                <el-switch
+                    v-model="testInDebug"
+                    class="ml-2"
+                    inline-prompt
+                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949;"
+                    active-text="直接测试"
+                    inactive-text="逐步测试"
+                />
+              </el-col>
+            </rl-row>
+            <el-button type="primary" class="startTestButton">{{ this.testInDebug ? '开 始 测 试' : '下 一 步'}}</el-button>
           </el-col>
         </el-row>
       </el-col>
@@ -44,7 +56,8 @@ export default {
       testingItemBoxOnLoad: true,
       testPlanId: 0,
       testPlanName: '',
-      testPlanDescription: ''
+      testPlanDescription: '',
+      testInDebug: false
     }
   },
   beforeMount() {

@@ -17,8 +17,8 @@ import LeftSideBar from "@/components/LeftSideBar.vue"
 import addNewTestProcessPage from "@/components/AddNewTestProcessPage.vue"
 import HomePage from "@/components/HomePage.vue"
 import LogPage from "@/components/LogPage.vue"
-import TestPage from "@/components/TestPage.vue";
-import settingPage from "@/components/settingPage.vue";
+import TestPage from "@/components/TestPage.vue"
+import settingPage from "@/components/settingPage.vue"
 import {ref, onMounted, onUnmounted, getCurrentInstance, markRaw} from 'vue'
 
 export default {

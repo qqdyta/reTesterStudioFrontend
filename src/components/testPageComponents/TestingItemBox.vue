@@ -1,8 +1,8 @@
 <template>
   <ul v-loading="props.onLoad" class="infinite-list" style="overflow: auto">
     <el-row v-for="step in props.testPlan" :key="step.id" class="infinite-list-item" @click="showTestingItemDetail(step.id)">
-      <el-col :span="18">{{ step['data']['stepName'] }}</el-col>
-      <el-col :span="6" style="cursor: pointer">成功</el-col>
+      <el-col :span="16">{{ step['data']['stepName'] }}</el-col>
+      <el-col :span="8" style="cursor: pointer;border-left: 1px solid #676767;  align-items: center; text-align: center">等待测试</el-col>
     </el-row>
   </ul>
 </template>
